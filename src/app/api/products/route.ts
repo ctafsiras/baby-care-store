@@ -12,33 +12,38 @@ const productSchema = z.object({
   stock: z.number().int().nonnegative().default(0),
 });
 
-export const GET = withAuth(async () => {
+export const GET = async () => {
   const products = await prisma.product.findMany();
   return NextResponse.json(products);
-});
+};
 
-export const POST = withAuth(async (request: Request) => {
-  try {
-    const body = await request.json();
-    const { name, description, price, stock } = productSchema.parse(body);
+export const POST = withAuth(
+  async (request: Request & { user?: { userId: string; role: string } }) => {
+    try {
+      const body = await request.json();
+      const { name, description, price, stock } = productSchema.parse(body);
 
-    const product = await prisma.product.create({
-      data: {
-        name,
-        description,
-        price,
-        stock,
-      },
-    });
+      if (request.user?.role !== "admin") {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      const product = await prisma.product.create({
+        data: {
+          name,
+          description,
+          price,
+          stock,
+        },
+      });
 
-    return NextResponse.json(product, { status: 201 });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
+      return NextResponse.json(product, { status: 201 });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return NextResponse.json({ error: error.errors }, { status: 400 });
+      }
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 }
+      );
     }
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
   }
-});
+);

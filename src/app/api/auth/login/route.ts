@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const token = signJWT({ userId: user.id, email: user.email });
+    const token = signJWT({ userId: user.id, role: user.role });
 
     return NextResponse.json({ token });
   } catch (error) {

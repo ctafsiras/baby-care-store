@@ -6,7 +6,7 @@ import { withAuth } from "@/lib/middleware";
 
 export const GET = withAuth(
   async (
-    request: Request & { user?: { userId: string; email: string } },
+    request: Request & { user?: { userId: string; role: string } },
     { params }: { params: { id: string } }
   ) => {
     const userId = request.user?.userId;
@@ -29,7 +29,7 @@ export const GET = withAuth(
 
 export const PUT = withAuth(
   async (
-    request: Request & { user?: { userId: string; email: string } },
+    request: Request & { user?: { userId: string; role: string } },
     { params }: { params: { id: string } }
   ) => {
     const userId = request.user?.userId;
@@ -66,7 +66,7 @@ export const PUT = withAuth(
 
 export const DELETE = withAuth(
   async (
-    request: Request & { user?: { userId: string; email: string } },
+    request: Request & { user?: { userId: string; role: string } },
     { params }: { params: { id: string } }
   ) => {
     const userId = request.user?.userId;

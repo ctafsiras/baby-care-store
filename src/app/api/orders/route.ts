@@ -15,7 +15,13 @@ const orderSchema = z.object({
 });
 
 export const GET = withAuth(
-  async (request: Request & { user?: { userId: string; email: string } }) => {
+  async (request: Request & { user?: { userId: string; role: string } }) => {
+    if (request.user?.role === "admin") {
+      const orders = await prisma.order.findMany({
+        include: { orderItems: { include: { product: true } } },
+      });
+      return NextResponse.json(orders);
+    }
     const userId = request.user?.userId;
     const orders = await prisma.order.findMany({
       where: { userId },
@@ -29,6 +35,7 @@ export const POST = withAuth(
   async (request: Request & { user?: { userId: string; email: string } }) => {
     try {
       const body = await request.json();
+
       const { items } = orderSchema.parse(body);
       const userId = request.user?.userId!;
 
