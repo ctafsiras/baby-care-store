@@ -9,7 +9,7 @@ const productSchema = z.object({
   name: z.string().min(2),
   description: z.string().min(10),
   price: z.number().positive(),
-  stock: z.number().int().nonnegative(),
+  stock: z.number().int().nonnegative().default(0),
 });
 
 export const GET = withAuth(async () => {
