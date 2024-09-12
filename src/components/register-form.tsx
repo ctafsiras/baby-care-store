@@ -35,7 +35,7 @@ const FormSchema = z.object({
 });
 
 export function RegisterForm() {
-  const [register, { isLoading }] = useRegisterMutation();
+  const [register, { isLoading, error }] = useRegisterMutation();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
@@ -57,9 +57,18 @@ export function RegisterForm() {
         description: "You can now log in and start exploring.",
       });
     } else {
+      console.log("error", error);
+
       toast({
-        title: res.error?.data?.error!,
-        description: "Please try again.",
+        variant: "destructive",
+        title: "Something went wrong!",
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
+              {JSON.stringify(res?.error, null, 2)}
+            </code>
+          </pre>
+        ),
       });
     }
   }
