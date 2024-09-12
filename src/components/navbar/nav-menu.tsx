@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import Image from "next/image";
 import Logo from "@/assets/Baby-Care-Store-Logo.png";
+import { ModeToggle } from "../mode-toggle";
 
-export default function NavigationMenuDemo() {
+export default function NavigationMenu() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow-sm">
@@ -24,14 +25,7 @@ export default function NavigationMenuDemo() {
           >
             Products
           </Link>
-          <Link
-            href="#"
-            className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            prefetch={false}
-          >
-            <ShoppingCartIcon className="h-5 w-5" />
-            <span className="sr-only">Cart</span>
-          </Link>
+
           {isLoggedIn ? (
             <>
               <Link
@@ -62,7 +56,7 @@ export default function NavigationMenuDemo() {
                 Login
               </Link>
               <Link
-                href="#"
+                href="/register"
                 className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
@@ -70,6 +64,15 @@ export default function NavigationMenuDemo() {
               </Link>
             </div>
           )}
+          <Link
+            href="#"
+            className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            prefetch={false}
+          >
+            <ShoppingCartIcon className="h-5 w-5" />
+            <span className="sr-only">Cart</span>
+          </Link>
+          <ModeToggle />
         </nav>
         <Sheet>
           <SheetTrigger asChild>
