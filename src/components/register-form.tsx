@@ -20,6 +20,7 @@ import { Label } from "./ui/label";
 import { useState } from "react";
 import { Checkbox } from "./ui/checkbox";
 import { useRouter } from "next/navigation";
+import { useRegisterMutation } from "@/redux/api/auth";
 
 const FormSchema = z.object({
   name: z.string().min(3, {
@@ -34,6 +35,7 @@ const FormSchema = z.object({
 });
 
 export function RegisterForm() {
+  const [register, { isLoading }] = useRegisterMutation();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
@@ -47,26 +49,19 @@ export function RegisterForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const user = await res.json();
-    console.log("user", user);
-    if (user.userId && user.message) {
+    const res = await register(data);
+    if (res.data?.userId && res.data?.message) {
       router.push("/login");
+      toast({
+        title: "Account Created Successfully!",
+        description: "You can now log in and start exploring.",
+      });
+    } else {
+      toast({
+        title: res.error?.data?.error!,
+        description: "Please try again.",
+      });
     }
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(user, null, 2)}</code>
-        </pre>
-      ),
-    });
   }
 
   return (
@@ -120,8 +115,8 @@ export function RegisterForm() {
           />
           <Label>I agree to the terms and conditions</Label>
         </div>
-        <Button disabled={!agree} className="w-full" type="submit">
-          Create Account
+        <Button disabled={!agree || isLoading} className="w-full" type="submit">
+          {isLoading ? "Registering..." : "Create Account"}
         </Button>
       </form>
     </Form>
