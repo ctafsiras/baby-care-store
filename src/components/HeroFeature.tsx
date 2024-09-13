@@ -70,12 +70,12 @@ export default function HeroFeature() {
               >
                 <div className="bg-gray-700 rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105">
                   <div className="relative h-32 sm:h-40 md:h-48 bg-gray-600">
-                    <Image
+                    {/* <Image
                       src={`/placeholder.svg?height=192&width=256`}
                       alt={product.name}
                       layout="fill"
                       objectFit="cover"
-                    />
+                    /> */}
                     <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
                       -20%
                     </div>

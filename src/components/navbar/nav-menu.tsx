@@ -6,6 +6,7 @@ import Image from "next/image";
 import Logo from "@/assets/Baby-Care-Store-Logo.png";
 import { ModeToggle } from "../mode-toggle";
 import DynamicMenuItems from "./dynamic-menu-items";
+import DynamicMobileItems from "./dynamic-mobile-items";
 
 export default function NavigationMenu() {
   return (
@@ -17,7 +18,7 @@ export default function NavigationMenu() {
         </Link>
         <nav className="hidden items-center gap-4 md:flex">
           <Link
-            href="#"
+            href="/products"
             className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
           >
             Products
@@ -40,7 +41,7 @@ export default function NavigationMenu() {
               >
                 Products
               </Link>
-              <DynamicMenuItems />
+              <DynamicMobileItems />
               <ModeToggle />
             </div>
           </SheetContent>
