@@ -27,9 +27,20 @@ export const orderApi = createApi({
         };
       },
     }),
+    getAllOrders: builder.query<Order[], string>({
+      query: (token) => {
+        return {
+          url: "/",
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useCreateOrderMutation } = orderApi;
+export const { useCreateOrderMutation, useGetAllOrdersQuery } = orderApi;

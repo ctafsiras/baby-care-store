@@ -18,14 +18,14 @@ export const GET = withAuth(
   async (request: Request & { user?: { userId: string; role: string } }) => {
     if (request.user?.role === "admin") {
       const orders = await prisma.order.findMany({
-        include: { orderItems: { include: { product: true } } },
+        include: { user: true, orderItems: { include: { product: true } } },
       });
       return NextResponse.json(orders);
     }
     const userId = request.user?.userId;
     const orders = await prisma.order.findMany({
       where: { userId },
-      include: { orderItems: { include: { product: true } } },
+      include: { user: true, orderItems: { include: { product: true } } },
     });
     return NextResponse.json(orders);
   }

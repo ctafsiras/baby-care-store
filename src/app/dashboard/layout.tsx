@@ -18,6 +18,7 @@ export default function DashboardLayout({
     ...(role === "admin"
       ? [
           { href: "/dashboard/products", label: "Products" },
+          { href: "/dashboard/add-product", label: "Add Product" },
           { href: "/dashboard/orders", label: "Orders" },
         ]
       : [{ href: "/dashboard/my-orders", label: "My Orders" }]),
