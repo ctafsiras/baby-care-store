@@ -6,7 +6,6 @@ export default function Home() {
   // throw Error("Not implemented");
   return (
     <>
-      <NavigationMenu />
       <HeroFeature />
     </>
   );
