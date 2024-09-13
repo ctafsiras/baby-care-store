@@ -11,21 +11,21 @@ import { notFound } from "next/navigation";
 
 export default function ProductDetails({ productId }: { productId: string }) {
   const { data: product, isLoading } = useGetSingleProductQuery(productId);
+
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    setQuantity(
+      isNaN(value) ? 1 : Math.max(1, Math.min(value, product?.stock!))
+    );
+  };
   if (isLoading) {
     return <Loading />;
   }
   if (!product) {
     return notFound();
   }
-  const [quantity, setQuantity] = useState(1);
-
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value);
-    setQuantity(
-      isNaN(value) ? 1 : Math.max(1, Math.min(value, product?.stock))
-    );
-  };
-
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
