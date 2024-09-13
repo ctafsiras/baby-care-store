@@ -5,11 +5,13 @@ import type { RootState } from "@/redux/store";
 // Define a type for the slice state
 interface UserToken {
   token: string | null;
+  role: string | null;
 }
 
 // Define the initial state using that type
 const initialState: UserToken = {
   token: null,
+  role: null,
 };
 
 export const userSlice = createSlice({
@@ -19,9 +21,11 @@ export const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.token = null;
+      state.role = null;
     },
-    login: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
+    login: (state, action: PayloadAction<{ token: string; role: string }>) => {
+      state.token = action.payload.token;
+      state.role = action.payload.role;
     },
   },
 });
@@ -29,6 +33,7 @@ export const userSlice = createSlice({
 export const { login, logout } = userSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectUser = (state: RootState) => state.user.token;
+export const selectToken = (state: RootState) => state.user.token;
+export const selectRole = (state: RootState) => state.user.role;
 
 export default userSlice.reducer;

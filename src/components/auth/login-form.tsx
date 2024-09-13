@@ -44,7 +44,7 @@ export function LoginForm() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const res = await login(data);
     if (res.data?.token) {
-      dispatch(loginToken(res.data?.token));
+      dispatch(loginToken({ token: res.data?.token, role: res.data?.role }));
       router.push("/");
       toast({
         title: "Account Login Successfully!",

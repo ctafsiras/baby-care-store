@@ -13,6 +13,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { productApi } from "./api/product";
 import { cartSlice } from "./slice/cart";
+import { orderApi } from "./api/order";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [productApi.reducerPath]: productApi.reducer,
+  [orderApi.reducerPath]: orderApi.reducer,
   user: userSlice.reducer,
   cart: cartSlice.reducer,
 });
@@ -38,6 +40,7 @@ export const store = configureStore({
       },
     })
       .concat(authApi.middleware)
+      .concat(orderApi.middleware)
       .concat(productApi.middleware),
 });
 

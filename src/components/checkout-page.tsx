@@ -15,10 +15,16 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { clearCart, deleteItemFromCart, selectCart } from "@/redux/slice/cart";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useCreateOrderMutation } from "@/redux/api/order";
+import { selectToken } from "@/redux/slice/user";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
+  const [createOrder, data] = useCreateOrderMutation();
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCart);
+  const token = useAppSelector(selectToken);
+  const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const { toast } = useToast();
   const deliveryCharge = cartItems.length > 0 ? 15 : 0;
@@ -27,31 +33,41 @@ export default function CheckoutPage() {
     0;
   const total = subtotal + deliveryCharge;
 
-  const handleCheckout = () => {
-    if (cartItems.length === 0) {
+  const handleCheckout = async () => {
+    if (!token) {
       toast({
-        title: "Cart is empty",
-        description: "Please add items to your cart before checking out.",
+        title: "Login Required",
+        description: "Please login to checkout.",
         variant: "destructive",
       });
-      return;
+      return router.push("/login");
     }
 
-    const order = {
-      items: cartItems,
-      paymentMethod,
-      subtotal,
-      deliveryCharge,
-      total,
-    };
-    console.log("Order:", order);
-
-    toast({
-      title: "Order Placed Successfully!",
-      description: "Your order has been placed and will be delivered soon.",
-    });
-
-    dispatch(clearCart());
+    const items = cartItems.map((item) => ({
+      productId: item.id,
+      quantity: item.quantity,
+    }));
+    const order = await createOrder({ items, token });
+    if (order.data?.id) {
+      toast({
+        title: "Order Placed Successfully!",
+        description: "Your order has been placed and will be delivered soon.",
+      });
+      dispatch(clearCart());
+      return router.push("/dashboard/my-orders");
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Order Cannot be Placed!",
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
+              {JSON.stringify(data?.error, null, 2)}
+            </code>
+          </pre>
+        ),
+      });
+    }
   };
 
   return (

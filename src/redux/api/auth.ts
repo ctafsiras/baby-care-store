@@ -13,6 +13,7 @@ interface RegistrationData {
 }
 interface LoginResponse {
   token: string;
+  role: string;
   error?: string;
 }
 

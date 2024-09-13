@@ -3,14 +3,14 @@
 import { JSX, SVGProps } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { logout, selectUser } from "@/redux/slice/user";
+import { logout, selectToken } from "@/redux/slice/user";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { store } from "@/redux/store";
 import { selectTotalItems } from "@/redux/slice/cart";
 
 export default function DynamicMenuItems() {
   const dispatch = useAppDispatch();
-  const userToken = useAppSelector(selectUser);
+  const userToken = useAppSelector(selectToken);
   const itemCount = useAppSelector(selectTotalItems);
   return (
     <>
