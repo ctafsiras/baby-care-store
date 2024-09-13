@@ -16,6 +16,7 @@ import { cartSlice } from "./slice/cart";
 
 const persistConfig = {
   key: "root",
+  // timeout: 2000,
   storage,
 };
 

@@ -14,15 +14,14 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { clearCart, deleteItemFromCart, selectCart } from "@/redux/slice/cart";
-import { store } from "@/redux/store";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 export default function CheckoutPage() {
   const dispatch = useAppDispatch();
-  const cartItems = selectCart(store.getState());
+  const cartItems = useAppSelector(selectCart);
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const { toast } = useToast();
-  const deliveryCharge = 15;
+  const deliveryCharge = cartItems.length > 0 ? 15 : 0;
   const subtotal =
     cartItems?.reduce((total, item) => total + item.price * item.quantity, 0) ||
     0;
@@ -117,7 +116,11 @@ export default function CheckoutPage() {
                 <span>৳{total.toFixed(2)}</span>
               </div>
             </div>
-            <Button className="w-full mt-4" onClick={handleCheckout}>
+            <Button
+              disabled={cartItems.length === 0}
+              className="w-full mt-4"
+              onClick={handleCheckout}
+            >
               Proceed Checkout
             </Button>
           </CardFooter>
