@@ -42,7 +42,9 @@ export default function NavigationMenu() {
                 Products
               </Link>
               <DynamicMobileItems />
-              <ModeToggle />
+              <div className="text-center">
+                <ModeToggle />
+              </div>
             </div>
           </SheetContent>
         </Sheet>

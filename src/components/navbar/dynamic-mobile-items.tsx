@@ -20,17 +20,16 @@ export default function DynamicMobileItems() {
     <>
       <Link
         href="/checkout"
-        className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative"
+        className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 "
       >
-        <ShoppingCartIcon className="h-5 w-5" />
-        {itemCount > 0 && (
-          <span
-            className="absolute top-2 right-[92px] inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-yellow-600 rounded-full"
-            style={{ fontSize: 10, padding: 2 }}
-          >
-            {itemCount}
-          </span>
-        )}
+        <div className="relative">
+          <ShoppingCartIcon className="h-5 w-5" />
+          {itemCount > 0 && (
+            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-yellow-600 rounded-full">
+              {itemCount}
+            </span>
+          )}
+        </div>
         <span className="sr-only">Cart</span>
       </Link>
       {userToken ? (
@@ -41,15 +40,17 @@ export default function DynamicMobileItems() {
           >
             Dashboard
           </Link>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full border w-8 h-8"
-            onClick={() => dispatch(logout())}
-          >
-            <LogOutIcon className="h-5 w-5" />
-            <span className="sr-only">Logout</span>
-          </Button>
+          <div className="text-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full border w-8 h-8"
+              onClick={() => dispatch(logout())}
+            >
+              <LogOutIcon className="h-5 w-5" />
+              <span className="sr-only">Logout</span>
+            </Button>
+          </div>
         </>
       ) : (
         <div className="grid gap-2">
