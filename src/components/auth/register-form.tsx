@@ -14,9 +14,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { Label } from "./ui/label";
+import { Label } from "../ui/label";
 import { useState } from "react";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "../ui/checkbox";
 import { useRouter } from "next/navigation";
 import { useRegisterMutation } from "@/redux/api/auth";
 

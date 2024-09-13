@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX, SVGProps, useState } from "react";
+import { JSX, SVGProps } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { logout, selectUser } from "@/redux/slice/user";
@@ -11,8 +11,7 @@ import { selectTotalItems } from "@/redux/slice/cart";
 export default function DynamicMenuItems() {
   const dispatch = useAppDispatch();
   const userToken = selectUser(store.getState());
-  const itemCount = 1;
-  // const itemCount = selectTotalItems(store.getState());
+  const itemCount = selectTotalItems(store.getState());
   return (
     <>
       <Link

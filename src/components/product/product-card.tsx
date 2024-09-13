@@ -5,19 +5,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Button } from "./ui/button";
+} from "../ui/card";
+import { Button } from "../ui/button";
 import { Product } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/slice/cart";
 
-const ProductCard = ({
-  product,
-  addToCart,
-}: {
-  product: Product;
-  addToCart: (product: Product) => void;
-}) => {
+const ProductCard = ({ product }: { product: Product }) => {
+  const dispatch = useAppDispatch();
   return (
     <Card className="flex flex-col justify-between">
       <CardHeader>
@@ -49,7 +46,7 @@ const ProductCard = ({
         <p className="text-2xl font-bold">${product.price}</p>
       </CardContent>
       <CardFooter className="gap-2">
-        <Button className="w-full" onClick={() => addToCart(product)}>
+        <Button className="w-full" onClick={() => dispatch(addToCart(product))}>
           <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
         </Button>
         <Link className="w-full" href={`/products/${product.id}`}>

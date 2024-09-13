@@ -1,4 +1,4 @@
-import ProductDetails from "@/components/product-details";
+import ProductDetails from "@/components/product/product-details";
 
 const Page = ({ params }: { params: { productId: string } }) => {
   const { productId } = params;

@@ -1,21 +1,17 @@
 "use client";
 
-import { JSX, SVGProps, useState } from "react";
+import { JSX, SVGProps } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import Image from "next/image";
-import Logo from "@/assets/Baby-Care-Store-Logo.png";
-import { ModeToggle } from "../mode-toggle";
-import DynamicMenuItems from "./dynamic-menu-items";
 import { logout, selectUser } from "@/redux/slice/user";
 import { useAppDispatch } from "@/redux/hooks";
 import { store } from "@/redux/store";
+import { selectTotalItems } from "@/redux/slice/cart";
 
 export default function DynamicMobileItems() {
   const dispatch = useAppDispatch();
   const userToken = selectUser(store.getState());
-  const itemCount = 1;
+  const itemCount = selectTotalItems(store.getState());
   return (
     <>
       <Link

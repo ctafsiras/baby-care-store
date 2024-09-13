@@ -36,7 +36,7 @@ export default function NavigationMenu() {
           <SheetContent side="right" className="md:hidden">
             <div className="grid gap-4 p-4">
               <Link
-                href="#"
+                href="/products"
                 className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
               >
                 Products
