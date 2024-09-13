@@ -1,5 +1,3 @@
-// Need to use the React-specific entry point to import createApi
-import { config } from "@/lib/config";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface RegistrationResponse {
@@ -27,7 +25,7 @@ interface LoginData {
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${config.host}/api/auth`,
+    baseUrl: `/api/auth`,
   }),
   endpoints: (builder) => ({
     register: builder.mutation<RegistrationResponse, RegistrationData>({
