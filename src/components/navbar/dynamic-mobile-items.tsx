@@ -15,13 +15,22 @@ import { store } from "@/redux/store";
 export default function DynamicMobileItems() {
   const dispatch = useAppDispatch();
   const userToken = selectUser(store.getState());
+  const itemCount = 1;
   return (
     <>
       <Link
-        href="#"
-        className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+        href="/checkout"
+        className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative"
       >
         <ShoppingCartIcon className="h-5 w-5" />
+        {itemCount > 0 && (
+          <span
+            className="absolute top-2 right-[92px] inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-yellow-600 rounded-full"
+            style={{ fontSize: 10, padding: 2 }}
+          >
+            {itemCount}
+          </span>
+        )}
         <span className="sr-only">Cart</span>
       </Link>
       {userToken ? (
