@@ -1,6 +1,8 @@
-import HeroFeature from "@/components/HeroFeature";
-import NavigationMenu from "@/components/navbar/nav-menu";
-import { Button } from "@/components/ui/button";
+import BestSellers from "@/components/landing/best-sellers";
+import FeaturedCategories from "@/components/landing/featured-categories";
+import HeroSection from "@/components/landing/hero-section";
+import Newsletter from "@/components/landing/newsletter";
+import Testimonials from "@/components/landing/testimonials";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,7 +13,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <HeroFeature />
+      <HeroSection />
+      <FeaturedCategories />
+      <BestSellers />
+      <Testimonials />
+      <Newsletter />
     </>
   );
 }

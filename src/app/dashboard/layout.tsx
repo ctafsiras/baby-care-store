@@ -28,8 +28,8 @@ export default function DashboardLayout({
   ];
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      <aside className="w-64 bg-white shadow-md">
+    <div className="flex h-screen">
+      <aside className="w-64  shadow-md">
         <nav className="mt-5">
           <ul>
             {navItems.map((item) => (
