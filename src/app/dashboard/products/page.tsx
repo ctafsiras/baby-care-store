@@ -20,13 +20,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
 import { toast } from "@/hooks/use-toast";
 import EditProductModal from "@/components/product/edit-product-modal";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Product Management | Baby Care Store",
-  description:
-    "Manage and track all products on Baby Care Store, including inventory and orders",
-};
 export default function ProductsPage() {
   const token = useAppSelector(selectToken);
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();

@@ -23,13 +23,7 @@ import { selectToken } from "@/redux/slice/user";
 import { useGetAllOrdersQuery } from "@/redux/api/order";
 import { toast } from "@/hooks/use-toast";
 import Loading from "@/app/loading";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "My Orders | Baby Care Store",
-  description:
-    "View your past orders and manage your account on Baby Care Store",
-};
 export default function MyOrdersPage() {
   const token = useAppSelector(selectToken);
   const { data: orders, isLoading } = useGetAllOrdersQuery(token as string);
