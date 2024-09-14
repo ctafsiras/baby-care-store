@@ -1,7 +1,14 @@
 const Page = () => {
   return (
-    <div>
-      <h1>Hello from D:\Projects\baby-care-store\src\app\dashboard\page.tsx</h1>
+    <div className="flex h-screen justify-center items-center">
+      <div className="text-center">
+        <h1
+          className="text-5xl font-bold mb-4 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        >
+          Welcome to Baby Care Store Dashboard
+        </h1>
+      </div>
     </div>
   );
 };
