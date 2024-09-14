@@ -1,27 +1,27 @@
 import ProductDetails from "@/components/product/product-details";
+import { config } from "@/lib/config";
 import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
   params: { productId: string };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { productId } = params;
-  const product = await fetch(`/api/products/${productId}`).then((res) =>
-    res.json()
-  );
 
+  const product = await fetch(`${config.host}/api/products/${productId}`).then(
+    (res) => res.json()
+  );
   return {
     title: `${product.name} | Baby Care Store`,
     description: product.description,
   };
 }
 
-const Page = ({ params }: { params: { productId: string } }) => {
+const Page = ({ params }: Props) => {
   const { productId } = params;
   return (
     <div>

@@ -7,18 +7,26 @@ import { Badge } from "@/components/ui/badge";
 import { useGetSingleProductQuery } from "@/redux/api/product";
 import Loading from "@/app/loading";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
+import { addToCart } from "@/redux/slice/cart";
+import { useAppDispatch } from "@/redux/hooks";
+import { Product } from "@prisma/client";
 
 export default function ProductDetails({ productId }: { productId: string }) {
   const { data: product, isLoading } = useGetSingleProductQuery(productId);
-
+  const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     setQuantity(
       isNaN(value) ? 1 : Math.max(1, Math.min(value, product?.stock!))
     );
+  };
+  const handleBuyNow = (product: Product) => {
+    dispatch(addToCart(product));
+    router.push("/checkout");
   };
   if (isLoading) {
     return <Loading />;
@@ -85,7 +93,11 @@ export default function ProductDetails({ productId }: { productId: string }) {
                 className="w-20"
               />
             </div>
-            <Button className="w-full" disabled={product?.stock === 0}>
+            <Button
+              className="w-full"
+              disabled={product?.stock === 0}
+              onClick={() => dispatch(addToCart(product))}
+            >
               <ShoppingCart className="w-4 h-4 mr-2" />
               Add to Cart
             </Button>
@@ -93,6 +105,7 @@ export default function ProductDetails({ productId }: { productId: string }) {
               variant="secondary"
               className="w-full"
               disabled={product?.stock === 0}
+              onClick={() => handleBuyNow(product)}
             >
               <CreditCard className="w-4 h-4 mr-2" />
               Buy Now
