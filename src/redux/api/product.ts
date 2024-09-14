@@ -26,7 +26,7 @@ export const productApi = createApi({
         };
       },
     }),
-    AddProduct: builder.mutation<
+    addProduct: builder.mutation<
       Product,
       { product: Partial<Product>; token: string }
     >({
@@ -34,6 +34,36 @@ export const productApi = createApi({
         return {
           url: "/",
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+          },
+          body: data.product,
+        };
+      },
+      invalidatesTags: ["Products"],
+    }),
+    deleteProduct: builder.mutation<void, { productId: string; token: string }>(
+      {
+        query: (data) => {
+          return {
+            url: `/${data.productId}`,
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${data.token}`,
+            },
+          };
+        },
+        invalidatesTags: ["Products"],
+      }
+    ),
+    updateProduct: builder.mutation<
+      Product,
+      { product: Partial<Product>; token: string }
+    >({
+      query: (data) => {
+        return {
+          url: `/${data.product.id}`,
+          method: "PUT",
           headers: {
             Authorization: `Bearer ${data.token}`,
           },
@@ -51,4 +81,6 @@ export const {
   useGetAllProductsQuery,
   useGetSingleProductQuery,
   useAddProductMutation,
+  useDeleteProductMutation,
+  useUpdateProductMutation,
 } = productApi;

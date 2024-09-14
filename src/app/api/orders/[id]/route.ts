@@ -37,7 +37,7 @@ export const PUT = withAuth(
     const { status } = body;
 
     if (
-      !["pending", "processing", "shipped", "delivered", "cancelled"].includes(
+      !["Pending", "Processing", "Shipped", "Delivered", "Cancelled"].includes(
         status
       )
     ) {

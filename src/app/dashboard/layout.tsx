@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import { selectRole, selectToken } from "@/redux/slice/user";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function DashboardLayout({
   children,
@@ -11,8 +11,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const role = useAppSelector(selectRole);
-  console.log("role", role);
+  if (!role) {
+    router.push("/");
+  }
 
   const navItems = [
     ...(role === "admin"

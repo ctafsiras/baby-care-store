@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -19,21 +18,25 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useAppSelector } from "@/redux/hooks";
+import { selectToken } from "@/redux/slice/user";
+import { useGetAllOrdersQuery } from "@/redux/api/order";
+import { toast } from "@/hooks/use-toast";
+import Loading from "@/app/loading";
 
 export default function MyOrdersPage() {
-  const [orders, setOrders] = useState([
-    { id: 1, total: 49.99, status: "Delivered", rating: null },
-    { id: 2, total: 99.99, status: "Pending", rating: null },
-    { id: 3, total: 74.99, status: "Delivered", rating: 4 },
-  ]);
-
-  const handleRating = (orderId: number, rating: number) => {
-    setOrders(
-      orders.map((order) =>
-        order.id === orderId ? { ...order, rating } : order
-      )
-    );
+  const token = useAppSelector(selectToken);
+  const { data: orders, isLoading } = useGetAllOrdersQuery(token as string);
+  const handleRating = (orderId: string, rating: number) => {
+    toast({
+      title: "This feature is not implemented yet",
+      description: "Please try again later",
+    });
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -48,20 +51,16 @@ export default function MyOrdersPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orders.map((order) => (
+          {orders?.map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.id}</TableCell>
-              <TableCell>${order.total.toFixed(2)}</TableCell>
+              <TableCell>${order.totalPrice.toFixed(2)}</TableCell>
               <TableCell>{order.status}</TableCell>
               <TableCell>
                 {order.status === "Delivered" && (
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline">
-                        {order.rating
-                          ? `Rated ${order.rating}/5`
-                          : "Rate Order"}
-                      </Button>
+                      <Button variant="outline">Rate Your Order</Button>
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>

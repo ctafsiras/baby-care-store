@@ -43,7 +43,7 @@ export const POST = withAuth(
         const order = await prisma.order.create({
           data: {
             userId,
-            status: "pending",
+            status: "Pending",
             totalPrice: 0,
           },
         });

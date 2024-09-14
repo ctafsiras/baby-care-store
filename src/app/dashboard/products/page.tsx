@@ -11,16 +11,40 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { useGetAllProductsQuery } from "@/redux/api/product";
+import {
+  useDeleteProductMutation,
+  useGetAllProductsQuery,
+} from "@/redux/api/product";
 import Loading from "@/app/loading";
+import { useAppSelector } from "@/redux/hooks";
+import { selectToken } from "@/redux/slice/user";
+import { toast } from "@/hooks/use-toast";
+import EditProductModal from "@/components/product/edit-product-modal";
 
 export default function ProductsPage() {
-  const { data: products, isLoading } = useGetAllProductsQuery();
+  const token = useAppSelector(selectToken);
+  const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
+  const { data: products, isLoading } = useGetAllProductsQuery(undefined);
 
   if (isLoading) {
     return <Loading />;
   }
-  const handleDelete = (id: string) => {};
+  const handleDelete = async (id: string) => {
+    const res = await deleteProduct({ productId: id, token: token as string });
+    console.log("res", res);
+    if (res.error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: <pre>{JSON.stringify(res.error, null, 2)}</pre>,
+      });
+    } else {
+      toast({
+        title: "Success",
+        description: "Product deleted successfully",
+      });
+    }
+  };
 
   return (
     <div>
@@ -41,11 +65,12 @@ export default function ProductsPage() {
               <TableCell>${product.price.toFixed(2)}</TableCell>
               <TableCell>{product.stock}</TableCell>
               <TableCell>
-                <Button variant="outline" className="mr-2">
-                  Edit
-                </Button>
+                <span className="mr-2">
+                  <EditProductModal product={product} />
+                </span>
                 <Button
                   variant="destructive"
+                  disabled={isDeleting}
                   onClick={() => handleDelete(product.id)}
                 >
                   Delete

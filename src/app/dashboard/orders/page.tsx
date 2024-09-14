@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,7 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -17,17 +15,40 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetAllOrdersQuery } from "@/redux/api/order";
+import {
+  useGetAllOrdersQuery,
+  useUpdateOrderStatusMutation,
+} from "@/redux/api/order";
 import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
 import Loading from "@/app/loading";
+import { toast } from "@/hooks/use-toast";
 
 export default function OrdersPage() {
   const token = useAppSelector(selectToken);
   const { data: orders, isLoading } = useGetAllOrdersQuery(token as string);
-  console.log("orders", orders);
+  const [updateOrderStatus, { isLoading: isUpdating }] =
+    useUpdateOrderStatusMutation();
 
-  const handleStatusChange = (orderId: string, newStatus: string) => {};
+  const handleStatusChange = async (orderId: string, newStatus: string) => {
+    const res = await updateOrderStatus({
+      id: orderId,
+      status: newStatus,
+      token: token as string,
+    });
+    if (res.error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: <pre>{JSON.stringify(res.error, null, 2)}</pre>,
+      });
+    } else {
+      toast({
+        title: "Success",
+        description: "Order status updated successfully",
+      });
+    }
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -57,12 +78,21 @@ export default function OrdersPage() {
                   onValueChange={(value) => handleStatusChange(order.id, value)}
                   defaultValue={order.status}
                 >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Change status" />
+                  <SelectTrigger disabled={isUpdating} className="w-[180px]">
+                    <SelectValue placeholder="Change Status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Pending">Pending</SelectItem>
-                    <SelectItem value="Delivered">Delivered</SelectItem>
+                    {[
+                      "Pending",
+                      "Processing",
+                      "Shipped",
+                      "Delivered",
+                      "Cancelled",
+                    ].map((s) => (
+                      <SelectItem key={s} value={s}>
+                        {s}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </TableCell>

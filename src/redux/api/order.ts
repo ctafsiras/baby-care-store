@@ -14,6 +14,7 @@ export const orderApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/orders",
   }),
+  tagTypes: ["Orders"],
   endpoints: (builder) => ({
     createOrder: builder.mutation<Order, OrderInput>({
       query: (data) => {
@@ -26,6 +27,7 @@ export const orderApi = createApi({
           body: { items: data.items },
         };
       },
+      invalidatesTags: ["Orders"],
     }),
     getAllOrders: builder.query<Order[], string>({
       query: (token) => {
@@ -37,10 +39,31 @@ export const orderApi = createApi({
           },
         };
       },
+      providesTags: ["Orders"],
+    }),
+    updateOrderStatus: builder.mutation<
+      Order,
+      { token: string; id: string; status: string }
+    >({
+      query: (data) => {
+        return {
+          url: `/${data.id}`,
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+          },
+          body: { status: data.status },
+        };
+      },
+      invalidatesTags: ["Orders"],
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useCreateOrderMutation, useGetAllOrdersQuery } = orderApi;
+export const {
+  useCreateOrderMutation,
+  useGetAllOrdersQuery,
+  useUpdateOrderStatusMutation,
+} = orderApi;
