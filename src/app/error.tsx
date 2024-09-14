@@ -3,7 +3,13 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "lucide-react";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Error | Baby Care Store",
+  description:
+    "Sorry, an error occurred. Please try again or contact our support team",
+};
 export default function Error({
   error,
   reset,

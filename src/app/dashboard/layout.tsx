@@ -4,7 +4,13 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectRole, selectToken } from "@/redux/slice/user";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Dashboard | Baby Care Store",
+  description:
+    "Access and manage your account, orders, and products on Baby Care Store",
+};
 export default function DashboardLayout({
   children,
 }: {

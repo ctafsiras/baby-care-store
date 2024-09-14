@@ -18,7 +18,13 @@ import { useRouter } from "next/navigation";
 import { useAddProductMutation } from "@/redux/api/product";
 import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Add Product | Baby Care Store Admin",
+  description:
+    "Add new baby care products to our online store easily and efficiently",
+};
 const FormSchema = z.object({
   name: z.string().min(3, {
     message: "Name must be at least 3 characters.",
