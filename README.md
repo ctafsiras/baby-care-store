@@ -4,14 +4,13 @@
 
 1. [Introduction](#introduction)
 2. [About the Project](#about-the-project)
-3. [Features](#features)
-4. [Getting Started](#getting-started)
-5. [Prerequisites](#prerequisites)
-6. [Installation](#installation)
-7. [Running the Project](#running-the-project)
-8. [Guidelines](#guidelines)
-9. [Contributing](#contributing)
-10. [License](#license)
+3. [Getting Started](#getting-started)
+4. [Prerequisites](#prerequisites)
+5. [Installation](#installation)
+6. [Running the Project](#running-the-project)
+7. [Guidelines](#guidelines)
+8. [Contributing](#contributing)
+9. [License](#license)
 
 ## **Introduction**
 
@@ -20,14 +19,6 @@ Welcome to the Baby Care Store project, a premier online destination for top-qua
 ## **About the Project**
 
 The Baby Care Store project is built using Next.js, a popular React-based framework for building server-side rendered (SSR) and statically generated websites. The project utilizes a modern tech stack, including TypeScript, CSS, and HTML, to create a fast, scalable, and maintainable e-commerce platform.
-
-## **Features**
-
-- **Product Catalog**: A comprehensive catalog of baby care products, including diapers, formula, toys, and more.
-- **Shopping Cart**: A secure and user-friendly shopping cart system for easy checkout.
-- **Payment Gateway**: Integration with popular payment gateways for secure transactions.
-- **User Account Management**: User registration, login, and account management features.
-- **Order Management**: Order tracking, history, and management features.
 
 ## **Getting Started**
 
@@ -45,7 +36,7 @@ To get started with the Baby Care Store project, follow these steps:
 1. Clone the repository using Git:
 
 ```bash
-git clone https://github.com/your-username/baby-care-store.git
+git clone https://github.com/ctafsiras/baby-care-store.git
 ```
 
 2. Navigate to the project directory:
