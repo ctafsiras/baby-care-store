@@ -10,7 +10,9 @@ const productSchema = z.object({
   description: z.string().min(10),
   price: z.number().positive(),
   stock: z.number().int().nonnegative().default(0),
+
 });
+
 
 export const GET = async () => {
   const products = await prisma.product.findMany();
@@ -26,8 +28,11 @@ export const POST = withAuth(
       if (request.user?.role !== "admin") {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
       }
+
       const product = await prisma.product.create({
+
         data: {
+
           name,
           description,
           price,

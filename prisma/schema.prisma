@@ -23,7 +23,7 @@ model User {
   updatedAt DateTime @updatedAt
   orders    Order[]
 
-  @@map("BCS_Users")
+  @@map("Users")
 }
 
 model Product {
@@ -36,7 +36,7 @@ model Product {
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
 
-  @@map("BCS_Products")
+  @@map("Products")
 }
 
 model Order {
@@ -49,7 +49,7 @@ model Order {
   updatedAt  DateTime    @updatedAt
   orderItems OrderItem[]
 
-  @@map("BCS_Orders")
+  @@map("Orders")
 }
 
 model OrderItem {
@@ -63,5 +63,5 @@ model OrderItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("BCS_OrderItems")
+  @@map("OrderItems")
 }
