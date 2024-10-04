@@ -1,4 +1,5 @@
 import BestSellers from "@/components/landing/best-sellers";
+import TopCompanies from "@/components/landing/companies";
 import FeaturedCategories from "@/components/landing/featured-categories";
 import HeroSection from "@/components/landing/hero-section";
 import Newsletter from "@/components/landing/newsletter";
@@ -16,6 +17,7 @@ export default function Home() {
       <HeroSection />
       <FeaturedCategories />
       <BestSellers />
+      <TopCompanies />
       <Testimonials />
       <Newsletter />
     </>

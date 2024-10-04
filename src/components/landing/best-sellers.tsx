@@ -9,6 +9,8 @@ import { Product } from "@prisma/client";
 import { addToCart } from "@/redux/slice/cart";
 import { useAppDispatch } from "@/redux/hooks";
 import Loading from "@/app/loading";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export default function BestSellers() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,29 +33,43 @@ export default function BestSellers() {
     return <Loading />;
   }
 
+  const getVisibleProducts = () => {
+    const products = [];
+    for (let i = 0; i < 3; i++) {
+      const index = (currentIndex + i) % bestSellers.length;
+      products.push(bestSellers[index]);
+    }
+    return products;
+  };
+
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bsg-white">
+    <section className="w-full py-8">
       <div className="container px-4 md:px-6">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
           Best Sellers
         </h2>
         <div className="relative">
           <div className="flex overflow-hidden">
-            {bestSellers?.map((product: Product, index: number) => (
+            {getVisibleProducts().map((product: Product, index: number) => (
               <div
-                key={index}
-                className={`w-full flex-shrink-0 transition-all duration-300 ease-in-out ${
-                  index === currentIndex ? "opacity-100" : "opacity-0"
-                }`}
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                key={product.id}
+                className={cn(
+                  "w-full md:w-1/3 flex-shrink-0 transition-all duration-300 ease-in-out px-2",
+                  {
+                    "hidden md:block": index !== 1,
+                    "md:scale-95 z-0": index !== 1,
+                  }
+                )}
               >
                 <Card className="w-full max-w-sm mx-auto">
                   <CardContent className="p-6">
                     <div className="aspect-square relative mb-4">
-                      <img
+                      <Image
                         src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
                         alt={product.name}
                         className="object-cover w-full h-full rounded-lg"
+                        height={200}
+                        width={200}
                       />
                     </div>
                     <h3 className="text-xl font-semibold mb-2">
