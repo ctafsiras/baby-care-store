@@ -1,6 +1,6 @@
 // app/api/products/route.ts
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { withAuth } from "@/lib/middleware";
@@ -10,12 +10,33 @@ const productSchema = z.object({
   description: z.string().min(10),
   price: z.number().positive(),
   stock: z.number().int().nonnegative().default(0),
-
 });
 
+export const GET = async (req: NextRequest) => {
+  const { searchParams } = new URL(req.url);
+  const latest = searchParams.get("latest");
 
-export const GET = async () => {
-  const products = await prisma.product.findMany();
+  let products;
+
+  if (latest) {
+    const limit = parseInt(latest, 10);
+    if (isNaN(limit) || limit <= 0) {
+      return NextResponse.json(
+        { error: "Invalid latest parameter" },
+        { status: 400 }
+      );
+    }
+
+    products = await prisma.product.findMany({
+      take: limit,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  } else {
+    products = await prisma.product.findMany();
+  }
+
   return NextResponse.json(products);
 };
 
@@ -30,9 +51,7 @@ export const POST = withAuth(
       }
 
       const product = await prisma.product.create({
-
         data: {
-
           name,
           description,
           price,

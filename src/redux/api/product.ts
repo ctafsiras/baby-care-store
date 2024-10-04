@@ -18,6 +18,15 @@ export const productApi = createApi({
       },
       providesTags: ["Products"],
     }),
+    getLatestProducts: builder.query<Product[], number>({
+      query: (limit) => {
+        return {
+          url: `/?latest=${limit}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Products"],
+    }),
     getSingleProduct: builder.query<Product, string>({
       query: (productId) => {
         return {
@@ -83,4 +92,5 @@ export const {
   useAddProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
+  useGetLatestProductsQuery,
 } = productApi;
