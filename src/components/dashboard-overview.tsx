@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,7 +28,7 @@ const DashboardOverview: React.FC = () => {
   if (isLoading) return <p className="text-lg">Loading...</p>;
   if (isError)
     return <p className="text-lg text-red-500">Error loading dashboard data</p>;
-  if (!data) return null;
+  if (!data) return <div>No data</div>;
 
   const isAdmin = data.role === "admin";
 
@@ -89,9 +90,11 @@ const DashboardOverview: React.FC = () => {
   const COLORS = ["#3b82f6", "#ec4899", "#22c55e", "#f97316"];
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-3xl font-bold">Dashboard Overview</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="space-y-6">
+      <h1 className="text-3xl md:text-5xl text-center font-bold">
+        Dashboard Overview
+      </h1>
+      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {cardData.map((card, index) => (
           <Card key={index} className={`${card.color} text-white`}>
             <CardHeader>

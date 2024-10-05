@@ -3,7 +3,7 @@ import { verifyJWT } from "./jwt";
 
 export function withAuth(handler: Function) {
   return async (
-    request: Request & { user?: { userId: string; email: string } },
+    request: Request & { user?: { userId: string; role: string } },
     ...args: any[]
   ) => {
     try {
