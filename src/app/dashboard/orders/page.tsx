@@ -23,6 +23,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
 import Loading from "@/app/loading";
 import { toast } from "@/hooks/use-toast";
+import { Order, User } from "@prisma/client";
 
 export default function OrdersPage() {
   const token = useAppSelector(selectToken);
@@ -70,7 +71,7 @@ export default function OrdersPage() {
           {orders?.map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.id}</TableCell>
-              <TableCell>{order.userId}</TableCell>
+              <TableCell>{order.user.name}</TableCell>
               <TableCell>${order.totalPrice.toFixed(2)}</TableCell>
               <TableCell>{order.status}</TableCell>
               <TableCell>

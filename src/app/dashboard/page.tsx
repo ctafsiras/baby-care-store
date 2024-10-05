@@ -1,3 +1,4 @@
+import DashboardOverview from "@/components/dashboard-overview";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ const Page = () => {
         >
           Welcome to Baby Care Store Dashboard
         </h1>
+        <DashboardOverview />
       </div>
     </div>
   );
