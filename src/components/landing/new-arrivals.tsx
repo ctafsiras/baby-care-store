@@ -27,7 +27,7 @@ const NewArrivals: React.FC = () => {
                 className="rounded-lg shadow-md overflow-hidden"
               >
                 <Image
-                  src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
+                  src={product.image}
                   alt={product.name}
                   width={200}
                   height={200}

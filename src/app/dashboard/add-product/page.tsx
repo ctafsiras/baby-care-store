@@ -18,14 +18,13 @@ import { useRouter } from "next/navigation";
 import { useAddProductMutation } from "@/redux/api/product";
 import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
-import Image from "next/image";
-import {useState} from "react";
-// import {CldUploadButton} from "next-cloudinary";
-// import { uploadImage } from "@/lib/cloudinary";
 
 const FormSchema = z.object({
   name: z.string().min(3, {
     message: "Name must be at least 3 characters.",
+  }),
+  image: z.string().min(3, {
+    message: "Image must be at least 3 characters.",
   }),
   description: z.string().min(5, {
     message: "Description must be at least 5 characters.",
@@ -36,15 +35,12 @@ const FormSchema = z.object({
   stock: z.string().min(1, {
     message: "Stock must be at least 1 character.",
   }),
-  image: z.instanceof(File).optional(),
 });
-
 
 export default function AddProduct() {
   const [AddProduct, { isLoading }] = useAddProductMutation();
   const token = useAppSelector(selectToken);
   const router = useRouter();
-
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -53,9 +49,8 @@ export default function AddProduct() {
       description: "",
       stock: "",
       price: "",
-      image: undefined,
+      image: "",
     },
-
   });
   if (!token) {
     toast({
@@ -67,20 +62,14 @@ export default function AddProduct() {
   }
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const formData = new FormData();
-    formData.append('image', data.image as Blob);
-    // const imageUrl = await uploadImage(data.image);
-
     const res = await AddProduct({
-
       product: {
-
         ...data,
         price: Number(data.price),
         stock: Number(data.stock),
       },
       token: token as string,
     });
-
 
     console.log(res);
     if (res.data?.id) {
@@ -159,10 +148,21 @@ export default function AddProduct() {
             </FormItem>
           )}
         />
-      {/* <CldUploadButton uploadPreset="bxlcqkaf"/> */}
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Image URL</FormLabel>
+              <FormControl>
+                <Input placeholder="Product Image URL" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button disabled={isLoading} className="w-full" type="submit">
-
           {isLoading ? "Adding..." : "Add Product"}
         </Button>
       </form>

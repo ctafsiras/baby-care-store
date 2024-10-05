@@ -23,8 +23,12 @@ export default function DashboardLayout({
           { href: "/dashboard/products", label: "Products" },
           { href: "/dashboard/add-product", label: "Add Product" },
           { href: "/dashboard/orders", label: "Orders" },
+          { href: "/dashboard/my-profile", label: "My Profile" },
         ]
-      : [{ href: "/dashboard/my-orders", label: "My Orders" }]),
+      : [
+          { href: "/dashboard/my-orders", label: "My Orders" },
+          { href: "/dashboard/my-profile", label: "My Profile" },
+        ]),
   ];
 
   return (

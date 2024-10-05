@@ -4,7 +4,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, Star, ShoppingCart } from "lucide-react";
-import { useGetAllProductsQuery } from "@/redux/api/product";
+import {
+  useGetAllProductsQuery,
+  useGetBestProductsQuery,
+} from "@/redux/api/product";
 import { Product } from "@prisma/client";
 import { addToCart } from "@/redux/slice/cart";
 import { useAppDispatch } from "@/redux/hooks";
@@ -14,9 +17,9 @@ import { cn } from "@/lib/utils";
 
 export default function BestSellers() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { data: bestSellers, isLoading } = useGetAllProductsQuery<
+  const { data: bestSellers, isLoading } = useGetBestProductsQuery<
     Product[] | any
-  >();
+  >(4);
   const dispatch = useAppDispatch();
 
   const nextSlide = () => {
@@ -65,7 +68,7 @@ export default function BestSellers() {
                   <CardContent className="p-6">
                     <div className="aspect-square relative mb-4">
                       <Image
-                        src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
+                        src={product.image}
                         alt={product.name}
                         className="object-cover w-full h-full rounded-lg"
                         height={200}

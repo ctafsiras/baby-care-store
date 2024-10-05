@@ -18,12 +18,14 @@ model User {
   email     String   @unique
   password  String
   name      String
+  phone     String?  @default("")
+  address   String?  @default("")
   role      String   @default("user")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   orders    Order[]
 
-  @@map("Users")
+  @@map("BCS_Users")
 }
 
 model Product {
@@ -32,11 +34,12 @@ model Product {
   description String
   price       Float
   stock       Int         @default(0)
+  image       String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
 
-  @@map("Products")
+  @@map("BCS_Products")
 }
 
 model Order {
@@ -49,7 +52,7 @@ model Order {
   updatedAt  DateTime    @updatedAt
   orderItems OrderItem[]
 
-  @@map("Orders")
+  @@map("BCS_Orders")
 }
 
 model OrderItem {
@@ -63,5 +66,5 @@ model OrderItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("OrderItems")
+  @@map("BCS_OrderItems")
 }

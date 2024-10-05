@@ -48,7 +48,7 @@ export function LoginForm() {
       form.setValue("email", "user@example.com");
       form.setValue("password", "111111");
     } else {
-      form.setValue("email", "ctafsiras@gmail.com");
+      form.setValue("email", "admin@example.com");
       form.setValue("password", "111111");
     }
   };

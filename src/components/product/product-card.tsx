@@ -19,7 +19,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     <Card className="flex flex-col justify-between">
       <CardHeader>
         <Image
-          src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
+          src={product.image || ""}
           alt={product.name}
           className="w-full h-48 object-cover mb-4"
           width={600}

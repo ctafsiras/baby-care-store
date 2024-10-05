@@ -22,8 +22,8 @@ import {
 const profileSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  address: z.string().optional(),
+  phone: z.string().nullable(),
+  address: z.string().nullable(),
 });
 
 type ProfileFormData = z.infer<typeof profileSchema>;
@@ -91,7 +91,7 @@ export const UpdateProfileModal: React.FC<UpdateProfileModalProps> = ({
                 <FormItem>
                   <FormLabel>Phone</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,7 +104,7 @@ export const UpdateProfileModal: React.FC<UpdateProfileModalProps> = ({
                 <FormItem>
                   <FormLabel>Address</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

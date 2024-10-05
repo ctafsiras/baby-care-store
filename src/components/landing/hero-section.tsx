@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import HeroSectionImages from "./hero-section-images";
 
 export default function HeroSection() {
   return (
@@ -33,46 +34,7 @@ export default function HeroSection() {
           </div>
           <div className="flex items-center justify-center">
             <div className="grid grid-cols-2 gap-4">
-              <div className="relative group overflow-hidden rounded-lg">
-                <Image
-                  src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
-                  alt="Baby Stroller"
-                  className="object-cover w-full h-full transition-transform group-hover:scale-110"
-                  width="200"
-                  height="200"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity" />
-              </div>
-              <div className="relative group overflow-hidden rounded-lg">
-                <Image
-                  src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
-                  alt="Baby Clothes"
-                  className="object-cover w-full h-full transition-transform group-hover:scale-110"
-                  width="200"
-                  height="200"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity" />
-              </div>
-              <div className="relative group overflow-hidden rounded-lg">
-                <Image
-                  src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
-                  alt="Baby Toys"
-                  className="object-cover w-full h-full transition-transform group-hover:scale-110"
-                  width="200"
-                  height="200"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity" />
-              </div>
-              <div className="relative group overflow-hidden rounded-lg">
-                <Image
-                  src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
-                  alt="Baby Care Products"
-                  className="object-cover w-full h-full transition-transform group-hover:scale-110"
-                  width="200"
-                  height="200"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity" />
-              </div>
+              <HeroSectionImages />
             </div>
           </div>
         </div>
