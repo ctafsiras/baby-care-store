@@ -40,7 +40,7 @@ export default function ProductDetails({ productId }: { productId: string }) {
         <div className="space-y-4">
           <div className="aspect-square relative">
             <Image
-              src="https://hattimatim.com.bd/storage/Baby%20Acco/Baby%20Care%20set/47e8cb1e0b7992e140d6e2f83aa2dcc3.jpg"
+              src={product?.image}
               alt={product?.name}
               className="object-cover rounded-lg shadow-lg"
               width={600}
