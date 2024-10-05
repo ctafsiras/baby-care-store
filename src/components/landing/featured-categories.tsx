@@ -21,7 +21,7 @@ export default function FeaturedCategories() {
 
   return (
     <section id="featured" className="w-full py-8">
-      <div className="container px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
           Shop by Category
         </h2>

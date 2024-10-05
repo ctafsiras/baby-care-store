@@ -1,11 +1,14 @@
 import Image from "next/image";
 import React from "react";
 import Logo from "@/assets/Baby-Care-Store-Logo.png";
+import { Facebook, Twitter, Instagram } from "lucide-react";
+import Link from "next/link";
+
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-6">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 justify-between items-center">
           <div className="flex flex-col items-center mb-4">
             <Image src={Logo} alt="Logo" width={64} height={64} />
             <h1 className="text-2xl font-bold">Baby Care Store</h1>
@@ -13,36 +16,36 @@ const Footer = () => {
               Premier online destination for top-quality baby care products
             </p>
           </div>
-          <div className="footer-links flex flex-col">
+          <div className="flex flex-col">
             <h4 className="text-lg font-bold mb-2">Quick Links</h4>
             <ul className="space-y-1">
               <li>
-                <a className="text-gray-400 hover:text-white" href="#">
+                <Link className="text-gray-400 hover:text-white" href="/about">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="text-gray-400 hover:text-white" href="#">
+                <Link
+                  className="text-gray-400 hover:text-white"
+                  href="/privacy"
+                >
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="text-gray-400 hover:text-white" href="#">
+                <Link className="text-gray-400 hover:text-white" href="/terms">
                   Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
-          <div className="footer-contact flex flex-col">
+          <div className="flex flex-col max-w-52">
             <h4 className="text-lg font-bold mb-2">Contact Us</h4>
             <p>
-              Email:{" "}
-              <span className="text-gray-400">
-                support@baby-care-store.vercel.app
-              </span>
+              Email: <span className="text-gray-400">ctafsiras@gmail.com</span>
             </p>
             <p>
-              Phone: <span className="text-gray-400">(123) 456-7890</span>
+              Phone: <span className="text-gray-400">01983510532</span>
             </p>
             <p>
               Address:{" "}
@@ -51,15 +54,16 @@ const Footer = () => {
           </div>
           <div className="footer-social flex flex-col items-center">
             <h4 className="text-lg font-bold mb-2">Follow Us</h4>
-            <ul className="space-y-2">
+            <ul className="flex space-x-4">
               <li>
                 <a
                   className="text-gray-400 hover:text-white"
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Facebook"
                 >
-                  Facebook
+                  <Facebook size={24} />
                 </a>
               </li>
               <li>
@@ -68,8 +72,9 @@ const Footer = () => {
                   href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Twitter"
                 >
-                  Twitter
+                  <Twitter size={24} />
                 </a>
               </li>
               <li>
@@ -78,8 +83,9 @@ const Footer = () => {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Instagram"
                 >
-                  Instagram
+                  <Instagram size={24} />
                 </a>
               </li>
             </ul>

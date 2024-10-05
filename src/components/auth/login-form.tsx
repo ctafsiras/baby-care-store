@@ -34,6 +34,8 @@ export function LoginForm() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -41,6 +43,16 @@ export function LoginForm() {
       password: "",
     },
   });
+  const fillDemoCredentials = (type: "user" | "admin") => {
+    if (type === "user") {
+      form.setValue("email", "user@example.com");
+      form.setValue("password", "111111");
+    } else {
+      form.setValue("email", "ctafsiras@gmail.com");
+      form.setValue("password", "111111");
+    }
+  };
+
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const res = await login(data);
     if (res.data?.token) {
@@ -94,7 +106,23 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <div className="pt-4"></div>
+        <div className="py-4">
+          Fill with demo{" "}
+          <span
+            onClick={() => fillDemoCredentials("user")}
+            className="px-2 bg-yellow-300 dark:bg-yellow-500 hover:bg-yellow-400 dark:hover:bg-yellow-600 rounded-md py-0.5 cursor-pointer"
+          >
+            User
+          </span>{" "}
+          or{" "}
+          <span
+            onClick={() => fillDemoCredentials("admin")}
+            className="px-2 bg-yellow-300 dark:bg-yellow-500 hover:bg-yellow-400 dark:hover:bg-yellow-600 rounded-md py-0.5 cursor-pointer"
+          >
+            Admin
+          </span>{" "}
+          credentials
+        </div>
         <Button disabled={isLoading} className="w-full" type="submit">
           {isLoading ? "Logging in..." : "Login"}
         </Button>
