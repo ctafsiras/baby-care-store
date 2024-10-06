@@ -31,7 +31,6 @@ export default function OrdersPage() {
   const { data: orders, isLoading } = useGetAllOrdersQuery(token as string);
   const [updateOrderStatus, { isLoading: isUpdating }] =
     useUpdateOrderStatusMutation();
-
   const handleStatusChange = async (orderId: string, newStatus: string) => {
     const res = await updateOrderStatus({
       id: orderId,
