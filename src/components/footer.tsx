@@ -8,15 +8,15 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-6">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 justify-between items-center">
-          <div className="flex flex-col items-center mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="flex flex-col items-center mb-4 mx-auto">
             <Image src={Logo} alt="Logo" width={64} height={64} />
             <h1 className="text-2xl font-bold">Baby Care Store</h1>
             <p className="text-gray-400 max-w-52 text-center">
               Premier online destination for top-quality baby care products
             </p>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col mx-auto">
             <h4 className="text-lg font-bold mb-2">Quick Links</h4>
             <ul className="space-y-1">
               <li>
@@ -39,7 +39,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col max-w-52">
+          <div className="flex flex-col max-w-52 mx-auto">
             <h4 className="text-lg font-bold mb-2">Contact Us</h4>
             <p>
               Email: <span className="text-gray-400">ctafsiras@gmail.com</span>
@@ -52,7 +52,7 @@ const Footer = () => {
               <span className="text-gray-400">Dhaka, 1216, Bangladesh</span>
             </p>
           </div>
-          <div className="footer-social flex flex-col items-center">
+          <div className="footer-social flex flex-col items-center mx-auto">
             <h4 className="text-lg font-bold mb-2">Follow Us</h4>
             <ul className="flex space-x-4">
               <li>

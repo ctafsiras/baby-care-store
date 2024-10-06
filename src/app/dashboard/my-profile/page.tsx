@@ -37,9 +37,11 @@ const MyProfile: React.FC = () => {
       });
     }
   };
-
-  if (!user) {
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+  if (!user) {
+    return <div>User not found</div>;
   }
 
   return (

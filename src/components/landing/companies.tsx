@@ -12,11 +12,8 @@ import samsung from "@/assets/samsung.png";
 import toyota from "@/assets/car.png";
 
 const companies = [
-  { name: "Google", logo: google },
-  { name: "Apple", logo: apple },
   { name: "Microsoft", logo: microsoft },
   { name: "Amazon", logo: amazon },
-  { name: "Meta", logo: meta },
   { name: "Tesla", logo: tesla },
   { name: "IBM", logo: ibm },
   { name: "Intel", logo: intel },
@@ -27,20 +24,22 @@ const companies = [
 const TopCompanies: React.FC = () => {
   return (
     <section className="py-12 overflow-hidden">
-      <h2 className="text-3xl sm:text-5xl font-bold text-center mb-8">
+      <h2 className="text-xl sm:text-3xl font-bold text-center mb-4">
         Companies We Work With
       </h2>
       <div className="relative w-full overflow-hidden py-8">
         <div className="flex animate-scroll-rtl">
           {companies.concat(companies).map((company, index) => (
-            <div key={index} className="flex-shrink-0 mx-8">
+            <div
+              key={index}
+              className="flex-shrink-0 mx-8 border-gray-200 dark:border-gray-800 border-2 p-4 rounded-lg"
+            >
               <Image
                 src={company.logo}
                 alt={`${company.name} logo`}
-                width={100}
-                height={50}
+                width={90}
+                height={90}
                 objectFit="contain"
-                className="w-auto h-12"
               />
             </div>
           ))}

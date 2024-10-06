@@ -6,33 +6,31 @@ import HeroSectionImages from "./hero-section-images";
 
 export default function HeroSection() {
   return (
-    <section className="w-full py-8 bg-gradient-to-r from-pink-100 dark:from-pink-900 to-blue-100 dark:to-blue-900">
+    <section className="w-full py-4 sm:px-4 bg-gradient-to-r from-pink-100 dark:from-pink-900 to-blue-100 dark:to-blue-900">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+              <h1 className="text-3xl font-bold text-center md:text-left tracking-tighter sm:text-5xl xl:text-6xl/none">
                 Welcome to Baby Care Store
               </h1>
-              <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
+              <p className="max-w-[600px] text-gray-700 dark:text-gray-300 text-center md:text-left md:text-xl">
                 Discover our curated collection of premium baby products. Safe,
                 stylish, and loved by parents worldwide.
               </p>
             </div>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Link
-                href="/products"
-                className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-              >
-                Shop Now
-                <ArrowRight className="ml-2 h-4 w-4" />
+            <div className="flex gap-2 justify-center md:justify-start">
+              <Link href="/products">
+                <Button variant="default">
+                  Shop Now <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
               </Link>
               <Link href="/checkout">
                 <Button variant="outline">View Cart</Button>
               </Link>
             </div>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-end">
             <div className="grid grid-cols-2 gap-4">
               <HeroSectionImages />
             </div>

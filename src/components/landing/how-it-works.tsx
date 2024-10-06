@@ -27,9 +27,9 @@ const steps = [
 
 const HowItWorks: React.FC = () => {
   return (
-    <section className="py-16">
+    <section className="py-8 sm:px-4">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-5xl font-bold text-center mb-12">
+        <h2 className="text-xl sm:text-3xl font-bold text-center mb-4">
           How It Works
         </h2>
         <div className="flex flex-col md:flex-row justify-between items-start">

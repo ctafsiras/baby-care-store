@@ -20,9 +20,9 @@ export default function FeaturedCategories() {
   ];
 
   return (
-    <section id="featured" className="w-full py-8">
+    <section id="featured" className="w-full py-8 sm:px-4">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
+        <h2 className="text-xl font-bold tracking-tighter sm:text-3xl text-center mb-12">
           Shop by Category
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">

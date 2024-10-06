@@ -46,13 +46,13 @@ export default function BestSellers() {
   };
 
   return (
-    <section className="w-full py-8">
+    <section className="w-full py-4 sm:px-4">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
+        <h2 className="text-xl font-bold tracking-tighter sm:text-3xl text-center mb-4">
           Best Sellers
         </h2>
-        <div className="relative">
-          <div className="flex overflow-hidden">
+        <div className="relative p-4 sm:p-8">
+          <div className="flex overflow-hidden gap-4">
             {getVisibleProducts().map((product: Product, index: number) => (
               <div
                 key={product.id}
@@ -65,7 +65,7 @@ export default function BestSellers() {
                 )}
               >
                 <Card className="w-full max-w-sm mx-auto">
-                  <CardContent className="p-6">
+                  <CardContent className="p-4">
                     <div className="aspect-square relative mb-4">
                       <Image
                         src={product.image}
