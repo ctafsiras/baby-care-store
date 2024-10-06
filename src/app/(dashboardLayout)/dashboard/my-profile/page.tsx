@@ -12,6 +12,7 @@ import {
 } from "@/redux/api/profile";
 import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
+import Image from "next/image";
 
 const MyProfile: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,30 +46,41 @@ const MyProfile: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">My Profile</h1>
-      <div className=" shadow-md rounded-lg p-6">
+    <div className="container mx-auto px-4">
+      <h1 className="text-3xl font-bold mb-6 text-center">My Profile</h1>
+      <div className=" shadow-md rounded-lg px-6 py-4">
+        <div className="flex justify-center items-center mb-4">
+          <Image
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+            alt="Profile Image"
+            width={150}
+            height={150}
+            className="rounded-full"
+          />
+        </div>
         <div className="grid grid-cols-2 gap-4">
-          <div>
+          <div className="flex flex-col items-center">
             <p className="font-semibold">Name:</p>
             <p>{user.name}</p>
           </div>
-          <div>
+          <div className="flex flex-col items-center">
             <p className="font-semibold">Email:</p>
             <p>{user.email}</p>
           </div>
-          <div>
+          <div className="flex flex-col items-center">
             <p className="font-semibold">Phone:</p>
             <p>{user.phone}</p>
           </div>
-          <div>
+          <div className="flex flex-col items-center">
             <p className="font-semibold">Address:</p>
             <p>{user.address}</p>
           </div>
         </div>
-        <Button className="mt-6" onClick={() => setIsModalOpen(true)}>
-          Update Profile
-        </Button>
+        <div className="flex justify-center items-center">
+          <Button className="mt-6" onClick={() => setIsModalOpen(true)}>
+            Update Profile
+          </Button>
+        </div>
       </div>
       {isModalOpen && (
         <UpdateProfileModal

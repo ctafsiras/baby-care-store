@@ -24,6 +24,7 @@ const profileSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().nullable(),
   address: z.string().nullable(),
+  image: z.string().nullable(),
 });
 
 type ProfileFormData = z.infer<typeof profileSchema>;
@@ -103,6 +104,19 @@ export const UpdateProfileModal: React.FC<UpdateProfileModalProps> = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <Input {...field} value={field.value || ""} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="image"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image</FormLabel>
                   <FormControl>
                     <Input {...field} value={field.value || ""} />
                   </FormControl>
