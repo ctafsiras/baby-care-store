@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <div className="container mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-8">All Products</h1>
+      <h1 className="text-xl sm:text-3xl text-center font-bold mb-4">
+        All Products
+      </h1>
       <ProductsPage />
     </div>
   );

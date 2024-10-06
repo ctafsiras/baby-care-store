@@ -2,6 +2,7 @@ import { ShoppingCart, Star, View } from "lucide-react";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -19,13 +20,14 @@ const ProductCard = ({ product }: { product: Product }) => {
     <Card className="flex flex-col justify-between">
       <CardHeader>
         <Image
-          src={product.image || ""}
+          src={product.image}
           alt={product.name}
           className="w-full h-48 object-cover mb-4"
           width={600}
           height={600}
         />
         <CardTitle>{product.name}</CardTitle>
+        <CardDescription>{product.description}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center mb-2">
@@ -45,13 +47,13 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
         <p className="text-2xl font-bold">${product.price}</p>
       </CardContent>
-      <CardFooter className="gap-2">
-        <Button className="w-full" onClick={() => dispatch(addToCart(product))}>
-          <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+      <CardFooter className="flex justify-between">
+        <Button className="!px-2" onClick={() => dispatch(addToCart(product))}>
+          <ShoppingCart className="mr-1 h-4" /> Add to Cart
         </Button>
-        <Link className="w-full" href={`/products/${product.id}`}>
-          <Button className="w-full" variant="outline">
-            <View className="mr-2 h-4 w-4" />
+        <Link className="" href={`/products/${product.id}`}>
+          <Button className="!px-2" variant="outline">
+            <View className="mr-1 h-4" />
             View Details
           </Button>
         </Link>
