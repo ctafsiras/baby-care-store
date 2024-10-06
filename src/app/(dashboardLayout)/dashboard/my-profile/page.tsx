@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { UpdateProfileModal } from "@/components/profile/update-profile-modal";
@@ -51,8 +49,8 @@ const MyProfile: React.FC = () => {
       <div className=" shadow-md rounded-lg px-6 py-4">
         <div className="flex justify-center items-center mb-4">
           <Image
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-            alt="Profile Image"
+            src={user.image!}
+            alt={user.name}
             width={150}
             height={150}
             className="rounded-full"
