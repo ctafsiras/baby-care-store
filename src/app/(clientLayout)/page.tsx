@@ -5,7 +5,7 @@ import HeroSection from "@/components/landing/hero-section";
 import Newsletter from "@/components/landing/newsletter";
 import Testimonials from "@/components/landing/testimonials";
 import { Metadata } from "next";
-import HowItWorks from "../components/landing/how-it-works";
+import HowItWorks from "../../components/landing/how-it-works";
 import NewArrivals from "@/components/landing/new-arrivals";
 
 export const metadata: Metadata = {

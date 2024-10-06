@@ -23,6 +23,7 @@ import { selectToken } from "@/redux/slice/user";
 import { useGetAllOrdersQuery } from "@/redux/api/order";
 import { toast } from "@/hooks/use-toast";
 import Loading from "@/app/loading";
+import { getStatusColor } from "@/lib/statusColor";
 
 export default function MyOrdersPage() {
   const token = useAppSelector(selectToken);
@@ -68,7 +69,15 @@ export default function MyOrdersPage() {
               <TableCell>
                 {new Date(order.createdAt).toLocaleDateString()}
               </TableCell>
-              <TableCell>{order.status}</TableCell>
+              <TableCell>
+                <span
+                  className={`${getStatusColor(
+                    order.status
+                  )} px-2 py-1 rounded-md`}
+                >
+                  {order.status}
+                </span>
+              </TableCell>
               <TableCell>
                 {order.status === "Delivered" && (
                   <Dialog>

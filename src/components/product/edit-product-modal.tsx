@@ -47,6 +47,9 @@ const FormSchema = z.object({
   id: z.string().min(1, {
     message: "ID must be at least 1 character.",
   }),
+  image: z.string().min(1, {
+    message: "Image must be at least 1 character.",
+  }),
 });
 
 export default function EditProductModal({ product }: { product: Product }) {
@@ -62,6 +65,7 @@ export default function EditProductModal({ product }: { product: Product }) {
       stock: product.stock.toString(),
       price: product.price.toString(),
       id: product.id,
+      image: product.image,
     },
   });
 
@@ -168,6 +172,19 @@ export default function EditProductModal({ product }: { product: Product }) {
                   <FormLabel>Price</FormLabel>
                   <FormControl>
                     <Input placeholder="Price" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="image"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image URL</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Image" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -24,6 +24,7 @@ import { selectToken } from "@/redux/slice/user";
 import Loading from "@/app/loading";
 import { toast } from "@/hooks/use-toast";
 import { Order, User } from "@prisma/client";
+import { getStatusColor } from "@/lib/statusColor";
 
 export default function OrdersPage() {
   const token = useAppSelector(selectToken);
@@ -60,20 +61,41 @@ export default function OrdersPage() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Order ID</TableHead>
+            <TableHead>Order No</TableHead>
             <TableHead>Customer</TableHead>
+            <TableHead>Order Items</TableHead>
             <TableHead>Total</TableHead>
+            <TableHead>Order Date</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orders?.map((order) => (
+          {orders?.map((order, index) => (
             <TableRow key={order.id}>
-              <TableCell>{order.id}</TableCell>
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{order.user.name}</TableCell>
+              <TableCell>
+                {order.orderItems.map((item) => (
+                  <div key={item.product.id}>
+                    {item.product.name} X {item.quantity} - $
+                    {item.product.price}
+                  </div>
+                ))}
+              </TableCell>
               <TableCell>${order.totalPrice.toFixed(2)}</TableCell>
-              <TableCell>{order.status}</TableCell>
+              <TableCell>
+                {new Date(order.createdAt).toLocaleDateString()}
+              </TableCell>
+              <TableCell>
+                <span
+                  className={`${getStatusColor(
+                    order.status
+                  )} px-2 py-1 rounded-md`}
+                >
+                  {order.status}
+                </span>
+              </TableCell>
               <TableCell>
                 <Select
                   onValueChange={(value) => handleStatusChange(order.id, value)}

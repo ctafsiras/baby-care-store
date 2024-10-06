@@ -41,7 +41,6 @@ export default function RootLayout({
           <Toaster />
           <NavigationMenu />
           {children}
-          <Footer />
         </Providers>
       </body>
     </html>
