@@ -16,7 +16,9 @@ const MyProfile: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateProfile] = useUpdateProfileMutation();
   const token = useAppSelector(selectToken);
-  const { data: user, isLoading } = useGetProfileQuery(token as string);
+  const { data: user, isLoading } = useGetProfileQuery(token as string, {
+    refetchOnMountOrArgChange: true,
+  });
   const handleUpdateProfile = async (updatedData: Partial<User>) => {
     try {
       await updateProfile({
