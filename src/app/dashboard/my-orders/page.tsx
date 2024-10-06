@@ -44,17 +44,30 @@ export default function MyOrdersPage() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Order ID</TableHead>
+            <TableHead>Order No</TableHead>
+            <TableHead>Order Items</TableHead>
             <TableHead>Total</TableHead>
+            <TableHead>Order Date</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Rating</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orders?.map((order) => (
+          {orders?.map((order, i) => (
             <TableRow key={order.id}>
-              <TableCell>{order.id}</TableCell>
+              <TableCell>{i + 1}</TableCell>
+              <TableCell>
+                {order.orderItems.map((item) => (
+                  <div key={item.product.id}>
+                    {item.product.name} X {item.quantity} - $
+                    {item.product.price}
+                  </div>
+                ))}
+              </TableCell>
               <TableCell>${order.totalPrice.toFixed(2)}</TableCell>
+              <TableCell>
+                {new Date(order.createdAt).toLocaleDateString()}
+              </TableCell>
               <TableCell>{order.status}</TableCell>
               <TableCell>
                 {order.status === "Delivered" && (

@@ -1,4 +1,4 @@
-import { Order, User } from "@prisma/client";
+import { Order, Product, User } from "@prisma/client";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface OrderInput {
@@ -10,6 +10,10 @@ interface OrderInput {
 }
 interface OrderWithUser extends Order {
   user: User;
+  orderItems: {
+    product: Product;
+    quantity: number;
+  }[];
 }
 // Define a service using a base URL and expected endpoints
 export const orderApi = createApi({
