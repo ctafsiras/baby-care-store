@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { withAuth } from "@/lib/middleware";
-export const dynamic = "force-dynamic";
 
 const orderItemSchema = z.object({
   productId: z.string().uuid(),

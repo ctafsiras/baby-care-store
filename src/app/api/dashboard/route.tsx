@@ -1,7 +1,6 @@
 import { withAuth } from "@/lib/middleware";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-export const dynamic = "force-dynamic";
 export const GET = withAuth(
   async (
     request: Request & { user?: { userId: string; role: string } },
