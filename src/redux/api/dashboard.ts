@@ -14,6 +14,7 @@ export const dashboardApi = createApi({
           },
         };
       },
+      keepUnusedDataFor: 0,
     }),
   }),
 });
