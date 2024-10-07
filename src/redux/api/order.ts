@@ -46,8 +46,10 @@ export const orderApi = createApi({
           },
         };
       },
+      keepUnusedDataFor: 0,
       providesTags: ["Orders"],
     }),
+
     updateOrderStatus: builder.mutation<
       Order,
       { token: string; id: string; status: string }

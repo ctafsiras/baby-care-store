@@ -18,6 +18,7 @@ export const userApi = createApi({
           },
         };
       },
+      keepUnusedDataFor: 0,
       providesTags: ["Profile"],
     }),
     updateProfile: builder.mutation<
