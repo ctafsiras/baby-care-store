@@ -1,5 +1,6 @@
 import { withAuth } from "@/lib/middleware";
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export const GET = withAuth(
   async (
