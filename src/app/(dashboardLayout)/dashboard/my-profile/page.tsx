@@ -56,20 +56,20 @@ const MyProfile: React.FC = () => {
             className="rounded-full"
           />
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex flex-col items-start md:items-center">
             <p className="font-semibold">Name:</p>
             <p>{user.name}</p>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start md:items-center">
             <p className="font-semibold">Email:</p>
             <p>{user.email}</p>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start md:items-center">
             <p className="font-semibold">Phone:</p>
             <p>{user.phone}</p>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start md:items-center">
             <p className="font-semibold">Address:</p>
             <p>{user.address}</p>
           </div>
