@@ -63,7 +63,7 @@ export default function DashboardLayout({
   ];
 
   return (
-    <div className="flex h-screen">
+    <div className="flex max-h-screen">
       <aside className={`shadow-md ${isMobile ? "w-12" : "w-52"}`}>
         <nav className="mt-5">
           <ul>

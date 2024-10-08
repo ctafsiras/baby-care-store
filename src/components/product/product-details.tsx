@@ -8,7 +8,7 @@ import { useGetSingleProductQuery } from "@/redux/api/product";
 import Loading from "@/app/loading";
 import Image from "next/image";
 import { notFound, useRouter } from "next/navigation";
-import { addToCart } from "@/redux/slice/cart";
+import { addToCart, addToCartWithQuantity } from "@/redux/slice/cart";
 import { useAppDispatch } from "@/redux/hooks";
 import { Product } from "@prisma/client";
 
@@ -25,7 +25,7 @@ export default function ProductDetails({ productId }: { productId: string }) {
     );
   };
   const handleBuyNow = (product: Product) => {
-    dispatch(addToCart(product));
+    dispatch(addToCartWithQuantity({ ...product, quantity }));
     router.push("/checkout");
   };
   if (isLoading) {
@@ -96,7 +96,9 @@ export default function ProductDetails({ productId }: { productId: string }) {
             <Button
               className="w-full"
               disabled={product?.stock === 0}
-              onClick={() => dispatch(addToCart(product))}
+              onClick={() =>
+                dispatch(addToCartWithQuantity({ ...product, quantity }))
+              }
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
               Add to Cart
