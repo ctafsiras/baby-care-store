@@ -22,8 +22,7 @@ import { selectToken } from "@/redux/slice/user";
 const DashboardOverview: React.FC = () => {
   const token = useAppSelector(selectToken);
   const { data, isLoading, isError } = useGetDashboardDataQuery(
-    token as string,
-    { refetchOnMountOrArgChange: true }
+    token as string
   );
 
   if (isLoading) return <p className="text-lg">Loading...</p>;
