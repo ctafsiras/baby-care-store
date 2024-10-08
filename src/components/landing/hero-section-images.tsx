@@ -15,7 +15,7 @@ export default function HeroSectionImages() {
 
   return (
     <>
-      {bestSellers.map((product: Product) => (
+      {bestSellers?.map((product: Product) => (
         <div
           key={product.id}
           className="relative group overflow-hidden rounded-lg"

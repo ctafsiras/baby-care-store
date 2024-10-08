@@ -53,7 +53,7 @@ export default function BestSellers() {
         </h2>
         <div className="relative p-4 sm:p-8">
           <div className="flex overflow-hidden gap-4">
-            {getVisibleProducts().map((product: Product, index: number) => (
+            {getVisibleProducts()?.map((product: Product, index: number) => (
               <div
                 key={product.id}
                 className={cn(
@@ -70,7 +70,7 @@ export default function BestSellers() {
                       <Image
                         src={product.image}
                         alt={product.name}
-                        className="object-cover w-full h-full rounded-lg"
+                        className="object-cover w-auto h-auto rounded-lg"
                         height={200}
                         width={200}
                       />

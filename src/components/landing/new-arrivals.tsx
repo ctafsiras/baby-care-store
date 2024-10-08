@@ -21,7 +21,7 @@ const NewArrivals: React.FC = () => {
           <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {latestProducts.map((product: Product) => (
+            {latestProducts?.map((product: Product) => (
               <div
                 key={product.id}
                 className="rounded-lg shadow-md overflow-hidden"
