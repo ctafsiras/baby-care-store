@@ -7,6 +7,7 @@ export const GET = withAuth(
     { params }: { params: { id: string } }
   ) => {
     const userId = request.user?.userId;
+    console.log("userId for testing", userId);
     const user = await prisma?.user.findUnique({
       where: { id: userId },
     });
