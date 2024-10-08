@@ -21,9 +21,9 @@ export default function HeroSectionImages() {
           <Image
             src={product.image}
             alt={product.name}
-            className="object-cover w-full h-full transition-transform group-hover:scale-110"
-            width="150"
-            height="150"
+            className="object-cover transition-transform group-hover:scale-110"
+            width={150}
+            height={150}
           />
           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity" />
         </div>

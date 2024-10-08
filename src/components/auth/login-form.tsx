@@ -57,7 +57,11 @@ export function LoginForm() {
     const res = await login(data);
     if (res.data?.token) {
       dispatch(loginToken({ token: res.data?.token, role: res.data?.role }));
-      router.push("/");
+      if (res.data?.role === "admin") {
+        router.push("/dashboard");
+      } else {
+        router.push("/");
+      }
       toast({
         title: "Account Login Successfully!",
         description: "You can now log in and start exploring.",

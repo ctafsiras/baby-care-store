@@ -30,7 +30,7 @@ export default function HeroSection() {
               </Link>
             </div>
           </div>
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-center">
             <div className="grid grid-cols-2 gap-4">
               <HeroSectionImages />
             </div>
