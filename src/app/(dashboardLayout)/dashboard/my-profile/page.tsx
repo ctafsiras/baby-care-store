@@ -11,6 +11,7 @@ import {
 import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
 import Image from "next/image";
+import { Loader2 } from "lucide-react";
 
 const MyProfile: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,8 +38,9 @@ const MyProfile: React.FC = () => {
     }
   };
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />;
   }
+
   if (!user) {
     return <div>User not found</div>;
   }

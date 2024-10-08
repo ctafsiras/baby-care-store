@@ -2,6 +2,7 @@
 
 import { useGetBestProductsQuery } from "@/redux/api/product";
 import { Product } from "@prisma/client";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 
 export default function HeroSectionImages() {
@@ -9,7 +10,8 @@ export default function HeroSectionImages() {
     Product[] | any
   >(4);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />;
 
   return (
     <>

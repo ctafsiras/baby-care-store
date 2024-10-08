@@ -18,6 +18,7 @@ import {
 import { useGetDashboardDataQuery } from "@/redux/api/dashboard";
 import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
+import {Loader2} from "lucide-react";
 
 const DashboardOverview: React.FC = () => {
   const token = useAppSelector(selectToken);
@@ -25,8 +26,8 @@ const DashboardOverview: React.FC = () => {
     token as string
   );
 
-  if (isLoading) return <p className="text-lg">Loading...</p>;
-  console.log("data", data);
+  if (isLoading) return <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />;
+
 
   if (!data) return <div>No data</div>;
 
