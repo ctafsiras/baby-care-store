@@ -17,11 +17,11 @@ const NewArrivals: React.FC = () => {
         <h2 className="text-xl sm:text-3xl font-bold text-center mb-8">
           Our New Arrivals
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {isLoading ? (
-            <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />
-          ) : (
-            latestProducts.map((product: Product) => (
+        {isLoading ? (
+          <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {latestProducts.map((product: Product) => (
               <div
                 key={product.id}
                 className="rounded-lg shadow-md overflow-hidden"
@@ -31,7 +31,7 @@ const NewArrivals: React.FC = () => {
                   alt={product.name}
                   width={200}
                   height={200}
-                  className="w-full h-48 object-cover"
+                  className="w-auto h-auto object-contain"
                 />
                 <div className="p-4">
                   <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
@@ -47,9 +47,9 @@ const NewArrivals: React.FC = () => {
                   </Link>
                 </div>
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
