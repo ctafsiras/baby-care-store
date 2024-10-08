@@ -64,14 +64,14 @@ export default function DashboardLayout({
 
   return (
     <div className="flex h-screen">
-      <aside className={`shadow-md ${isMobile ? "w-16" : "w-52"}`}>
+      <aside className={`shadow-md ${isMobile ? "w-12" : "w-52"}`}>
         <nav className="mt-5">
           <ul>
             {navItems.map((item) => (
               <li key={item.href} className="mb-2">
                 <Link
                   href={item.href}
-                  className={`block rounded-lg px-4 py-2 text-sm transition-all duration-300 ${
+                  className={`block rounded-lg px-4 md:px-4 py-2 text-sm transition-all duration-300 ${
                     pathname === item.href
                       ? "bg-black text-white dark:bg-white dark:text-black"
                       : "hover:bg-black/90 hover:text-white dark:hover:bg-white/90 dark:hover:text-black"
@@ -85,7 +85,7 @@ export default function DashboardLayout({
           </ul>
         </nav>
       </aside>
-      <main className="flex-1 p-8 overflow-auto">{children}</main>
+      <main className="flex-1 p-4 md:p-8 overflow-auto">{children}</main>
     </div>
   );
 }
