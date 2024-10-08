@@ -10,7 +10,13 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           <div className="flex flex-col items-center mb-4 mx-auto">
-            <Image src={Logo} alt="Logo" width={64} height={64} />
+            <Image
+              className="w-auto h-auto"
+              src={Logo}
+              alt="Logo"
+              width={64}
+              height={64}
+            />
             <h1 className="text-2xl font-bold">Baby Care Store</h1>
             <p className="text-gray-400 max-w-52 text-center">
               Premier online destination for top-quality baby care products

@@ -39,7 +39,6 @@ const TopCompanies: React.FC = () => {
                 alt={`${company.name} logo`}
                 width={90}
                 height={90}
-                objectFit="contain"
               />
             </div>
           ))}

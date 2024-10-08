@@ -13,7 +13,13 @@ export default function NavigationMenu() {
     <header className="sticky top-0 z-50 w-full bg-background shadow-sm sm:px-4">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <Image src={Logo} alt="Logo" width={32} height={32} />
+          <Image
+            className="w-auto h-auto"
+            src={Logo}
+            alt="Logo"
+            width={32}
+            height={32}
+          />
           <span className="font-bold">Baby Care Store</span>
         </Link>
         <nav className="hidden items-center gap-4 md:flex">

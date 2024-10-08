@@ -6,21 +6,21 @@ export default function Testimonials() {
   const reviews = [
     {
       name: "Fatema Rahman",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: "",
       review:
         "The quality of the baby clothes from this shop is amazing. I was quite skeptical at first because I hadn't shopped for baby items online in Bangladesh before. But when I received the package, I was pleasantly surprised. The fabric is so soft, breathable, and perfect for the weather here. My baby is very comfortable in them, and I’ve already recommended this shop to other mothers in my community. I’ll definitely be coming back for more!",
       rating: 5,
     },
     {
       name: "Farhan Ahmed",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: "",
       review:
         "I was impressed with how quickly my order arrived. In Bangladesh, delivery services can often be unreliable, but the customer service here was fantastic. They even followed up with a call to confirm my order. The quality of the product is as promised, and I can see myself becoming a regular customer. It’s rare to find a place that combines great service, fast delivery, and quality products all in one.",
       rating: 4,
     },
     {
       name: "Ayesha Siddique",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: "",
       review:
         "We bought a baby monitor, and it has made our lives so much easier. As a working mom, I am often in different parts of the house, and being able to check on my baby with just a glance at the monitor is a relief. The features are perfect for the needs of a busy household in Dhaka. From the range to the quality of the audio and video, it’s exactly what we were looking for. I wish I had bought it earlier!",
       rating: 5,
