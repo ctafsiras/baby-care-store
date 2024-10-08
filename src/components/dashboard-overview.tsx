@@ -26,8 +26,8 @@ const DashboardOverview: React.FC = () => {
   );
 
   if (isLoading) return <p className="text-lg">Loading...</p>;
-  if (isError)
-    return <p className="text-lg text-red-500">Error loading dashboard data</p>;
+  console.log("data", data);
+
   if (!data) return <div>No data</div>;
 
   const isAdmin = data.role === "admin";
