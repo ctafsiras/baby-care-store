@@ -13,7 +13,13 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { clearCart, deleteItemFromCart, selectCart } from "@/redux/slice/cart";
+import {
+  addToCart,
+  clearCart,
+  deleteItemFromCart,
+  removeFromCart,
+  selectCart,
+} from "@/redux/slice/cart";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useCreateOrderMutation } from "@/redux/api/order";
 import { selectToken } from "@/redux/slice/user";
@@ -82,24 +88,47 @@ export default function CheckoutPage() {
             {cartItems.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
-              cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between items-center mb-2"
-                >
-                  <div>
-                    <span className="font-medium">{item.name}</span>
-                    <span className="text-sm text-gray-600 ml-2">
-                      {item.quantity} x ৳{item.price}
-                    </span>
+              cartItems.map((item, index) => (
+                <div key={item.id}>
+                  <div className="flex justify-between items-center mb-2">
+                    <div>
+                      <span className="font-medium text-md">{item.name}</span>
+                      <span className="text-sm text-gray-600 ml-2">
+                        <div className="flex items-center space-x-2">
+                          <Button
+                            variant="default"
+                            size="sm"
+                            onClick={() => dispatch(removeFromCart(item))}
+                            disabled={item.quantity === 1}
+                            className="font-bold"
+                          >
+                            -
+                          </Button>
+                          <span className="font-bold">{item.quantity}</span>
+                          <Button
+                            variant="default"
+                            size="sm"
+                            onClick={() => dispatch(addToCart(item))}
+                            className="font-bold"
+                          >
+                            +
+                          </Button>
+                          <span>x ৳{item.price}</span>
+                        </div>
+                      </span>
+                    </div>
+
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      onClick={() => dispatch(deleteItemFromCart(item.id))}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
                   </div>
-                  <Button
-                    variant="destructive"
-                    size="icon"
-                    onClick={() => dispatch(deleteItemFromCart(item.id))}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  {index < cartItems.length - 1 && (
+                    <hr className="my-2 border-gray-200" />
+                  )}
                 </div>
               ))
             )}

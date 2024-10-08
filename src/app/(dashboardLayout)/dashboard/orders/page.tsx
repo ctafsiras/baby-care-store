@@ -88,9 +88,9 @@ export default function OrdersPage() {
               </TableCell>
               <TableCell>
                 <span
-                  className={`${getStatusColor(
+                  className={`px-2 py-1 rounded-md ${getStatusColor(
                     order.status
-                  )} px-2 py-1 rounded-md`}
+                  )}`}
                 >
                   {order.status}
                 </span>

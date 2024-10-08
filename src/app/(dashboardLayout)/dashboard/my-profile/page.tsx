@@ -44,40 +44,44 @@ const MyProfile: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">My Profile</h1>
-      <div className=" shadow-md rounded-lg px-6 py-4">
-        <div className="flex justify-center items-center mb-4">
+    <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-8">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">
+        My Profile
+      </h1>
+      <div className="shadow-md rounded-lg px-3 sm:px-6 py-6 sm:py-8 mb-6">
+        <div className="flex justify-center items-center mb-6 sm:mb-8">
           <Image
             src={user.image!}
             alt={user.name}
-            width={150}
-            height={150}
-            className="rounded-full"
+            width={100}
+            height={100}
+            className="rounded-full sm:w-[150px] sm:h-[150px]"
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex flex-col items-start md:items-center">
-            <p className="font-semibold">Name:</p>
-            <p>{user.name}</p>
-          </div>
-          <div className="flex flex-col items-start md:items-center">
-            <p className="font-semibold">Email:</p>
-            <p>{user.email}</p>
-          </div>
-          <div className="flex flex-col items-start md:items-center">
-            <p className="font-semibold">Phone:</p>
-            <p>{user.phone}</p>
-          </div>
-          <div className="flex flex-col items-start md:items-center">
-            <p className="font-semibold">Address:</p>
-            <p>{user.address}</p>
-          </div>
-        </div>
+        <table className="w-full border-collapse mb-6 sm:mb-8">
+          <tbody>
+            <tr className="border-b">
+              <td className="py-3 sm:py-4 px-2 sm:px-4 font-semibold">Name</td>
+              <td className="py-3 sm:py-4 px-2 sm:px-4">{user.name}</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-3 sm:py-4 px-2 sm:px-4 font-semibold">Email</td>
+              <td className="py-3 sm:py-4 px-2 sm:px-4">{user.email}</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-3 sm:py-4 px-2 sm:px-4 font-semibold">Phone</td>
+              <td className="py-3 sm:py-4 px-2 sm:px-4">{user.phone}</td>
+            </tr>
+            <tr>
+              <td className="py-3 sm:py-4 px-2 sm:px-4 font-semibold">
+                Address
+              </td>
+              <td className="py-3 sm:py-4 px-2 sm:px-4">{user.address}</td>
+            </tr>
+          </tbody>
+        </table>
         <div className="flex justify-center items-center">
-          <Button className="mt-6" onClick={() => setIsModalOpen(true)}>
-            Update Profile
-          </Button>
+          <Button onClick={() => setIsModalOpen(true)}>Update Profile</Button>
         </div>
       </div>
       {isModalOpen && (
