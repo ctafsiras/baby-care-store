@@ -56,7 +56,13 @@ export function LoginForm() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const res = await login(data);
     if (res.data?.token) {
-      dispatch(loginToken({ token: res.data?.token, role: res.data?.role }));
+      dispatch(
+        loginToken({
+          token: res.data?.token,
+          role: res.data?.role,
+          userId: res.data?.userId,
+        })
+      );
       if (res.data?.role === "admin") {
         router.push("/dashboard");
       } else {

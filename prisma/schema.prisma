@@ -14,17 +14,20 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  name      String
-  phone     String?  @default("")
-  address   String?  @default("")
-  role      String   @default("user")
-  image     String?  @default("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  orders    Order[]
+  id                String            @id @default(uuid())
+  email             String            @unique
+  password          String
+  name              String
+  phone             String?           @default("")
+  address           String?           @default("")
+  role              String            @default("user")
+  image             String?           @default("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  orders            Order[]
+  reviews           Review[]
+  orderFeedbacks    OrderFeedback[]
+  deliveryAddresses DeliveryAddress[]
 
   @@map("BCS_Users")
 }
@@ -39,19 +42,51 @@ model Product {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
+  reviews     Review[]
 
   @@map("BCS_Products")
 }
 
+model Review {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  rating      Int      @default(5)
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, productId])
+  @@map("BCS_Reviews")
+}
+
+model OrderFeedback {
+  id          String   @id @default(uuid())
+  orderId     String   @unique
+  order       Order    @relation(fields: [orderId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  rating      Int      @default(5)
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([orderId, userId])
+  @@map("BCS_OrderFeedbacks")
+}
+
 model Order {
-  id         String      @id @default(uuid())
-  userId     String
-  user       User        @relation(fields: [userId], references: [id])
-  status     String
-  totalPrice Float
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  orderItems OrderItem[]
+  id            String         @id @default(uuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id])
+  status        String
+  totalPrice    Float
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  orderItems    OrderItem[]
+  OrderFeedback OrderFeedback?
 
   @@map("BCS_Orders")
 }
@@ -68,4 +103,19 @@ model OrderItem {
   updatedAt DateTime @updatedAt
 
   @@map("BCS_OrderItems")
+}
+
+model DeliveryAddress {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  name       String
+  mobile     String
+  street     String
+  postalCode String
+  district   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("BCS_DeliveryAddresses")
 }

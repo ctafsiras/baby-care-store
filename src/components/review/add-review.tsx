@@ -1,0 +1,109 @@
+"use client";
+
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Star } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useAddReviewMutation } from "@/redux/api/review";
+import { useAppSelector } from "@/redux/hooks";
+import { selectToken } from "@/redux/slice/user";
+
+const reviewSchema = z.object({
+  rating: z.number().min(1).max(5),
+  description: z
+    .string()
+    .min(10, "Description must be at least 10 characters long")
+    .max(500, "Description must not exceed 500 characters"),
+});
+
+type ReviewFormValues = z.infer<typeof reviewSchema>;
+
+export const AddReview = ({ productId }: { productId: string }) => {
+  const [rating, setRating] = useState(0);
+  const [addReview, { isLoading }] = useAddReviewMutation();
+  const form = useForm<ReviewFormValues>({
+    resolver: zodResolver(reviewSchema),
+    defaultValues: {
+      rating: 0,
+      description: "",
+    },
+  });
+  const token = useAppSelector(selectToken);
+
+  const onSubmit = (data: ReviewFormValues) => {
+    addReview({
+      token: token as string,
+      productId,
+      review: data,
+    });
+    form.reset();
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="rating"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Rating</FormLabel>
+              <FormControl>
+                <div className="flex space-x-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      className={`cursor-pointer ${
+                        star <= rating
+                          ? "text-yellow-400 fill-yellow-400"
+                          : "text-gray-300"
+                      }`}
+                      onClick={() => {
+                        setRating(star);
+                        field.onChange(star);
+                      }}
+                    />
+                  ))}
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Review</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Write your review here..."
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Submitting..." : "Submit Review"}
+        </Button>
+      </form>
+    </Form>
+  );
+};

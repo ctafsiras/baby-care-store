@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
     const token = signJWT({ userId: user.id, role: user.role });
 
-    return NextResponse.json({ token, role: user.role });
+    return NextResponse.json({ token, role: user.role, userId: user.id });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });

@@ -11,6 +11,7 @@ import { notFound, useRouter } from "next/navigation";
 import { addToCart, addToCartWithQuantity } from "@/redux/slice/cart";
 import { useAppDispatch } from "@/redux/hooks";
 import { Product } from "@prisma/client";
+import { ProductReviews } from "../review/product-reviews";
 
 export default function ProductDetails({ productId }: { productId: string }) {
   const { data: product, isLoading } = useGetSingleProductQuery(productId);
@@ -115,6 +116,7 @@ export default function ProductDetails({ productId }: { productId: string }) {
           </div>
         </div>
       </div>
+      <ProductReviews productId={productId} />
     </div>
   );
 }
