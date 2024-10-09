@@ -10,6 +10,9 @@ export const GET = withAuth(
     const userId = request.user?.userId;
     const user = await prisma.user.findUnique({
       where: { id: userId },
+      include: {
+        deliveryAddresses: true,
+      },
     });
 
     if (!user) {

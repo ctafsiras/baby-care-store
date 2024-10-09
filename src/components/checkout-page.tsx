@@ -24,12 +24,17 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useCreateOrderMutation } from "@/redux/api/order";
 import { selectToken } from "@/redux/slice/user";
 import { useRouter } from "next/navigation";
+import { useGetShippingAddressesQuery } from "@/redux/api/profile";
+import Link from "next/link";
 
 export default function CheckoutPage() {
+  const token = useAppSelector(selectToken);
   const [createOrder, data] = useCreateOrderMutation();
+  const { data: shippingAddresses, isLoading } = useGetShippingAddressesQuery(
+    token!
+  );
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCart);
-  const token = useAppSelector(selectToken);
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const { toast } = useToast();
@@ -135,6 +140,63 @@ export default function CheckoutPage() {
           </CardContent>
         </Card>
         <Card>
+          <CardHeader>
+            <CardTitle>Shipping Address</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup defaultValue="cash" onValueChange={setPaymentMethod}>
+              <div className="space-y-4">
+                {!token ? (
+                  <div className="text-center p-4">
+                    <p className="mb-2">
+                      Please log in to proceed with checkout.
+                    </p>
+                    <Link
+                      href="/login"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Go to login page
+                    </Link>
+                  </div>
+                ) : !shippingAddresses || shippingAddresses.length === 0 ? (
+                  <div className="text-center p-4">
+                    <p className="mb-2">No shipping address found.</p>
+                    <Link
+                      href="/dashboard/my-profile"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Go to profile to add a shipping address
+                    </Link>
+                  </div>
+                ) : (
+                  shippingAddresses.map((address) => (
+                    <div
+                      key={address.id}
+                      className="flex items-start space-x-2 p-3 border rounded-md"
+                    >
+                      <RadioGroupItem
+                        value={address.id}
+                        id={address.id}
+                        className="mt-1"
+                      />
+                      <div>
+                        <Label htmlFor={address.id} className="font-medium">
+                          {address.name}
+                        </Label>
+                        <div className="text-sm text-gray-600">
+                          <p>{address.street}</p>
+                          <p>
+                            {address.postalCode}, {address.district}
+                          </p>
+                          <p>Mobile: {address.mobile}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </RadioGroup>
+          </CardContent>
           <CardHeader>
             <CardTitle>Payment Method</CardTitle>
           </CardHeader>
