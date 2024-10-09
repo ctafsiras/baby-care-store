@@ -23,12 +23,12 @@ export default function BestSellers() {
   const dispatch = useAppDispatch();
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % bestSellers.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % bestSellers?.length);
   };
 
   const prevSlide = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + bestSellers.length) % bestSellers.length
+      (prevIndex) => (prevIndex - 1 + bestSellers?.length) % bestSellers?.length
     );
   };
 
@@ -39,7 +39,7 @@ export default function BestSellers() {
   const getVisibleProducts = () => {
     const products = [];
     for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % bestSellers.length;
+      const index = (currentIndex + i) % bestSellers?.length;
       products.push(bestSellers[index]);
     }
     return products;
