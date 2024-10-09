@@ -37,6 +37,7 @@ export default function CheckoutPage() {
   const cartItems = useAppSelector(selectCart);
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [shippingAddress, setShippingAddress] = useState("");
   const { toast } = useToast();
   const deliveryCharge = cartItems.length > 0 ? 15 : 0;
   const subtotal =
@@ -144,7 +145,7 @@ export default function CheckoutPage() {
             <CardTitle>Shipping Address</CardTitle>
           </CardHeader>
           <CardContent>
-            <RadioGroup defaultValue="cash" onValueChange={setPaymentMethod}>
+            <RadioGroup defaultValue="cash" onValueChange={setShippingAddress}>
               <div className="space-y-4">
                 {!token ? (
                   <div className="text-center p-4">
@@ -224,7 +225,7 @@ export default function CheckoutPage() {
               </div>
             </div>
             <Button
-              disabled={cartItems.length === 0}
+              disabled={cartItems.length === 0 || !shippingAddress}
               className="w-full mt-4"
               onClick={handleCheckout}
             >
