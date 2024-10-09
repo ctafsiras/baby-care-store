@@ -8,32 +8,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
 import { useGetAllOrdersQuery } from "@/redux/api/order";
 import { toast } from "@/hooks/use-toast";
 import Loading from "@/app/loading";
-// import { getStatusColor } from "@/lib/statusColor";
+import OrderFeedback from "@/components/feedback/order-feedback";
 
 export default function MyOrdersPage() {
   const token = useAppSelector(selectToken);
   const { data: orders, isLoading } = useGetAllOrdersQuery(token as string);
-  const handleRating = (orderId: string, rating: number) => {
-    toast({
-      title: "This feature is not implemented yet",
-      description: "Please try again later",
-    });
-  };
 
   if (isLoading) {
     return <Loading />;
@@ -50,7 +35,7 @@ export default function MyOrdersPage() {
             <TableHead>Total</TableHead>
             <TableHead>Order Date</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Rating</TableHead>
+            <TableHead>Feedback</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -79,43 +64,10 @@ export default function MyOrdersPage() {
                 </span>
               </TableCell>
               <TableCell>
-                {order.status === "Delivered" && (
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="outline">Rate Your Order</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Rate Your Order</DialogTitle>
-                      </DialogHeader>
-                      <RadioGroup
-                        onValueChange={(value) =>
-                          handleRating(order.id, Number(value))
-                        }
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="1" id="r1" />
-                          <Label htmlFor="r1">1</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="2" id="r2" />
-                          <Label htmlFor="r2">2</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="3" id="r3" />
-                          <Label htmlFor="r3">3</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="4" id="r4" />
-                          <Label htmlFor="r4">4</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="5" id="r5" />
-                          <Label htmlFor="r5">5</Label>
-                        </div>
-                      </RadioGroup>
-                    </DialogContent>
-                  </Dialog>
+                {order.status === "Delivered" ? (
+                  <OrderFeedback orderId={order.id} />
+                ) : (
+                  <p>Waiting for delivery</p>
                 )}
               </TableCell>
             </TableRow>

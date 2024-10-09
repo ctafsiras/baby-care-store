@@ -17,6 +17,7 @@ import { orderApi } from "./api/order";
 import { userApi } from "./api/profile";
 import { dashboardApi } from "./api/dashboard";
 import { reviewApi } from "./api/review";
+import { orderFeedbackApi } from "./api/orderFeedback";
 const persistConfig = {
   key: "root",
   // timeout: 2000,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [dashboardApi.reducerPath]: dashboardApi.reducer,
   [reviewApi.reducerPath]: reviewApi.reducer,
+  [orderFeedbackApi.reducerPath]: orderFeedbackApi.reducer,
   user: userSlice.reducer,
   cart: cartSlice.reducer,
 });
@@ -49,7 +51,8 @@ export const store = configureStore({
       .concat(productApi.middleware)
       .concat(userApi.middleware)
       .concat(dashboardApi.middleware)
-      .concat(reviewApi.middleware),
+      .concat(reviewApi.middleware)
+      .concat(orderFeedbackApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

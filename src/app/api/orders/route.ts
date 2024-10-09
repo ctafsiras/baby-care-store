@@ -18,7 +18,11 @@ export const GET = withAuth(
   async (request: Request & { user?: { userId: string; role: string } }) => {
     if (request.user?.role === "admin") {
       const orders = await prisma.order.findMany({
-        include: { user: true, orderItems: { include: { product: true } } },
+        include: {
+          user: true,
+          orderItems: { include: { product: true } },
+          OrderFeedback: true,
+        },
       });
       return NextResponse.json(orders);
     }

@@ -25,6 +25,13 @@ import Loading from "@/app/loading";
 import { toast } from "@/hooks/use-toast";
 import { Order, User } from "@prisma/client";
 import { getStatusColor } from "@/lib/statusColor";
+import OrderFeedback from "@/components/feedback/order-feedback";
+import { Star } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export default function OrdersPage() {
   const token = useAppSelector(selectToken);
@@ -67,6 +74,7 @@ export default function OrdersPage() {
             <TableHead>Order Date</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Actions</TableHead>
+            <TableHead>Feedback</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -117,6 +125,31 @@ export default function OrdersPage() {
                     ))}
                   </SelectContent>
                 </Select>
+              </TableCell>
+              <TableCell>
+                {order.OrderFeedback ? (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <div className="flex items-center cursor-pointer">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star
+                            key={star}
+                            className={`${
+                              star <= order.OrderFeedback?.rating
+                                ? "text-yellow-400 fill-yellow-400"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <p>{order.OrderFeedback?.description}</p>
+                    </PopoverContent>
+                  </Popover>
+                ) : (
+                  <p>Waiting for Delivery</p>
+                )}
               </TableCell>
             </TableRow>
           ))}
