@@ -1,6 +1,10 @@
 import { toast } from "@/hooks/use-toast";
-import { OrderFeedback } from "@prisma/client";
+import { OrderFeedback, User } from "@prisma/client";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+export interface OrderFeedbackWithUser extends OrderFeedback {
+  user: User;
+}
 
 export const orderFeedbackApi = createApi({
   reducerPath: "orderFeedbackApi",
@@ -9,6 +13,15 @@ export const orderFeedbackApi = createApi({
   }),
   tagTypes: ["OrderFeedbacks"],
   endpoints: (builder) => ({
+    getAllOrderFeedbacks: builder.query<OrderFeedbackWithUser[], void>({
+      query: (data) => {
+        return {
+          url: `/`,
+          method: "GET",
+        };
+      },
+      providesTags: ["OrderFeedbacks"],
+    }),
     getOrderFeedbackByOrder: builder.query<
       OrderFeedback,
       { token: string; orderId: string }
@@ -64,5 +77,8 @@ export const orderFeedbackApi = createApi({
   }),
 });
 
-export const { useGetOrderFeedbackByOrderQuery, useAddOrderFeedbackMutation } =
-  orderFeedbackApi;
+export const {
+  useGetOrderFeedbackByOrderQuery,
+  useAddOrderFeedbackMutation,
+  useGetAllOrderFeedbacksQuery,
+} = orderFeedbackApi;
