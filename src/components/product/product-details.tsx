@@ -12,13 +12,14 @@ import { addToCart, addToCartWithQuantity } from "@/redux/slice/cart";
 import { useAppDispatch } from "@/redux/hooks";
 import { Product } from "@prisma/client";
 import { ProductReviews } from "../review/product-reviews";
+import { calculateAverageRating } from "@/lib/averageRating";
 
 export default function ProductDetails({ productId }: { productId: string }) {
   const { data: product, isLoading } = useGetSingleProductQuery(productId);
   const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
-
+  console.log(product);
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     setQuantity(
@@ -57,14 +58,14 @@ export default function ProductDetails({ productId }: { productId: string }) {
                 <Star
                   key={i}
                   className={`w-5 h-5 ${
-                    i < Math.floor(product?.stock)
+                    i < Math.floor(calculateAverageRating(product?.reviews))
                       ? "text-yellow-400 fill-yellow-400"
                       : "text-gray-300"
                   }`}
                 />
               ))}
               <span className="ml-2 text-sm text-gray-600">
-                {product?.stock} out of 5 stars
+                {calculateAverageRating(product?.reviews)} out of 5.
               </span>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { withAuth } from "@/lib/middleware";
+import { Prisma } from "@prisma/client";
 
 const productSchema = z.object({
   name: z.string().min(2),
@@ -31,6 +32,13 @@ export const GET = async (req: NextRequest) => {
 
     products = await prisma.product.findMany({
       take: limit,
+      include: {
+        reviews: {
+          select: {
+            rating: true,
+          },
+        },
+      },
       orderBy: {
         createdAt: "desc",
       },
@@ -46,13 +54,36 @@ export const GET = async (req: NextRequest) => {
 
     products = await prisma.product.findMany({
       take: limit,
+      include: {
+        reviews: {
+          select: {
+            rating: true,
+          },
+        },
+      },
       orderBy: {
-        stock: "desc",
+        createdAt: "asc",
       },
     });
   } else {
-    products = await prisma.product.findMany();
+    products = await prisma.product.findMany({
+      include: {
+        reviews: {
+          select: {
+            rating: true,
+          },
+        },
+      },
+    });
   }
+  // const productsWithAvgRating = products.map((product) => ({
+  //   ...product,
+  //   averageRating:
+  //     product.reviews.length > 0
+  //       ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
+  //         product.reviews.length
+  //       : 0,
+  // }));
 
   return NextResponse.json(products);
 };

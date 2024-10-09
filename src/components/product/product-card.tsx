@@ -8,13 +8,15 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
-import { Product } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slice/cart";
+import { calculateAverageRating } from "@/lib/averageRating";
+import { Product, Review } from "@prisma/client";
+import { ProductWithReviews } from "@/redux/api/product";
 
-const ProductCard = ({ product }: { product: Product }) => {
+const ProductCard = ({ product }: { product: ProductWithReviews }) => {
   const dispatch = useAppDispatch();
   return (
     <Card className="flex flex-col justify-between">
@@ -35,14 +37,14 @@ const ProductCard = ({ product }: { product: Product }) => {
             <Star
               key={index}
               className={`w-5 h-5 ${
-                index < Math.floor(4)
+                index < Math.floor(calculateAverageRating(product?.reviews))
                   ? "text-yellow-400 fill-current"
                   : "text-gray-300"
               }`}
             />
           ))}
           <span className="ml-2 text-sm text-gray-600">
-            {product.stock.toFixed(1)}
+            {calculateAverageRating(product?.reviews)}/5
           </span>
         </div>
         <p className="text-2xl font-bold">${product.price}</p>

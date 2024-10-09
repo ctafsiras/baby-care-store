@@ -1,7 +1,10 @@
-import { Product } from "@prisma/client";
+import { Product, Review } from "@prisma/client";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// Define a service using a base URL and expected endpoints
+export interface ProductWithReviews extends Product {
+  reviews: Review[];
+}
+
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
@@ -9,7 +12,7 @@ export const productApi = createApi({
   }),
   tagTypes: ["Products"],
   endpoints: (builder) => ({
-    getAllProducts: builder.query<Product[], void>({
+    getAllProducts: builder.query<ProductWithReviews[], void>({
       query: () => {
         return {
           url: "/",
@@ -27,7 +30,7 @@ export const productApi = createApi({
       },
       providesTags: ["Products"],
     }),
-    getBestProducts: builder.query<Product[], number>({
+    getBestProducts: builder.query<ProductWithReviews[], number>({
       query: (limit) => {
         return {
           url: `/?best=${limit}`,
@@ -36,7 +39,7 @@ export const productApi = createApi({
       },
       providesTags: ["Products"],
     }),
-    getSingleProduct: builder.query<Product, string>({
+    getSingleProduct: builder.query<ProductWithReviews, string>({
       query: (productId) => {
         return {
           url: `/${productId}`,
