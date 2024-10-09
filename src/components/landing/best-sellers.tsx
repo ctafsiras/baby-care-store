@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, Star, ShoppingCart } from "lucide-react";
 import {
   ProductWithReviews,
-  useGetAllProductsQuery,
   useGetBestProductsQuery,
 } from "@/redux/api/product";
 import { Product } from "@prisma/client";
