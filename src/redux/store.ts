@@ -19,7 +19,7 @@ import { dashboardApi } from "./api/dashboard";
 import { reviewApi } from "./api/review";
 import { orderFeedbackApi } from "./api/orderFeedback";
 const persistConfig = {
-  key: "root",
+  key: "root-theke-change",
   // timeout: 2000,
   storage,
 };
