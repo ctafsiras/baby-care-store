@@ -17,19 +17,23 @@ import { cn } from "@/lib/utils";
 
 export default function BestSellers() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { data: bestSellers, isLoading } = useGetBestProductsQuery<
+  const { data: bestSellers = [], isLoading } = useGetBestProductsQuery<
     Product[] | any
   >(4);
   const dispatch = useAppDispatch();
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % bestSellers?.length);
+    if (bestSellers.length > 0) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % bestSellers.length);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + bestSellers?.length) % bestSellers?.length
-    );
+    if (bestSellers.length > 0) {
+      setCurrentIndex(
+        (prevIndex) => (prevIndex - 1 + bestSellers.length) % bestSellers.length
+      );
+    }
   };
 
   if (isLoading) {
@@ -37,9 +41,10 @@ export default function BestSellers() {
   }
 
   const getVisibleProducts = () => {
+    if (!bestSellers || bestSellers.length === 0) return [];
     const products = [];
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % bestSellers?.length;
+    for (let i = 0; i < Math.min(3, bestSellers.length); i++) {
+      const index = (currentIndex + i) % bestSellers.length;
       products.push(bestSellers[index]);
     }
     return products;
@@ -55,7 +60,7 @@ export default function BestSellers() {
           <div className="flex overflow-hidden gap-4">
             {getVisibleProducts()?.map((product: Product, index: number) => (
               <div
-                key={product.id}
+                key={product?.id || index}
                 className={cn(
                   "w-full md:w-1/3 flex-shrink-0 transition-all duration-300 ease-in-out px-2",
                   {
@@ -68,19 +73,19 @@ export default function BestSellers() {
                   <CardContent className="p-4">
                     <div className="aspect-square relative mb-4">
                       <Image
-                        src={product.image}
-                        alt={product.name}
+                        src={product?.image || "/placeholder-image.jpg"}
+                        alt={product?.name || "Product"}
                         className="object-cover w-auto h-auto rounded-lg"
                         height={200}
                         width={200}
                       />
                     </div>
                     <h3 className="text-xl font-semibold mb-2">
-                      {product.name}
+                      {product?.name || "Unnamed Product"}
                     </h3>
                     <div className="flex justify-between items-center mb-4">
                       <span className="text-2xl font-bold">
-                        ${product.price.toFixed(2)}
+                        ${(product?.price || 0).toFixed(2)}
                       </span>
                       <div className="flex items-center">
                         <Star className="w-5 h-5 fill-current text-yellow-400" />
@@ -88,7 +93,7 @@ export default function BestSellers() {
                       </div>
                     </div>
                     <Button
-                      onClick={() => dispatch(addToCart(product))}
+                      onClick={() => product && dispatch(addToCart(product))}
                       className="w-full"
                     >
                       <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
