@@ -12,6 +12,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
+import ShippingAddress from "@/components/profile/shipping-address";
 
 const MyProfile: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -94,6 +95,7 @@ const MyProfile: React.FC = () => {
           currentUser={user}
         />
       )}
+      <ShippingAddress />
     </div>
   );
 };
