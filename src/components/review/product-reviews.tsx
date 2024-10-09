@@ -3,6 +3,7 @@ import { AddReview } from "./add-review";
 import { useGetAllReviewsByProductQuery } from "@/redux/api/review";
 import { useAppSelector } from "@/redux/hooks";
 import { selectUserId } from "@/redux/slice/user";
+import Link from "next/link";
 
 export const ProductReviews = ({ productId }: { productId: string }) => {
   const { data: reviews, isLoading } =
@@ -13,7 +14,15 @@ export const ProductReviews = ({ productId }: { productId: string }) => {
       <h2 className="text-2xl font-bold text-center border-t mt-8 pt-4">
         Customer Reviews
       </h2>
-      {reviews?.every((review) => review.user.id !== userId) ? (
+      {!userId ? (
+        <p className="text-center text-gray-500">
+          You have to{" "}
+          <Link href="/login" className="text-blue-500 underline">
+            login
+          </Link>{" "}
+          to review this product
+        </p>
+      ) : reviews?.every((review) => review.user.id !== userId) ? (
         <AddReview productId={productId} />
       ) : (
         <p className="text-center text-sm italic text-gray-500">
