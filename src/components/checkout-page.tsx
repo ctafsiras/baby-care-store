@@ -108,7 +108,7 @@ export default function CheckoutPage() {
                       />
                       <div className="flex flex-col">
                         <span className="font-medium text-lg">{item.name}</span>
-                        <span className="text-sm text-gray-600">
+                        <span className="text-sm text-muted-foreground">
                           ৳{item.price}
                         </span>
                       </div>
@@ -195,16 +195,19 @@ export default function CheckoutPage() {
                         className="mt-1"
                       />
                       <div>
-                        <Label htmlFor={address.id} className="font-medium">
+                        <Label
+                          htmlFor={address.id}
+                          className="font-medium cursor-pointer"
+                        >
                           {address.name}
+                          <div className="text-sm">
+                            <p>{address.street}</p>
+                            <p>
+                              {address.postalCode}, {address.district}
+                            </p>
+                            <p>Mobile: {address.mobile}</p>
+                          </div>
                         </Label>
-                        <div className="text-sm text-gray-600">
-                          <p>{address.street}</p>
-                          <p>
-                            {address.postalCode}, {address.district}
-                          </p>
-                          <p>Mobile: {address.mobile}</p>
-                        </div>
                       </div>
                     </div>
                   ))

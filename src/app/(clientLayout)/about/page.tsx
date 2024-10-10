@@ -24,7 +24,86 @@ const AboutPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl text-center font-bold mb-6">About Us</h1>
-
+      <div className="bg-yello">
+        <div className="grid grid-cols-3 gap-4 p-4 border rounded-lg shadow-sm">
+          <div className="flex flex-col items-center">
+            <div className="bg-background h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Background</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-foreground h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Foreground</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-card h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Card</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-card-foreground h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Card Foreground</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-popover h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Popover</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-popover-foreground h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Popover Foreground</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-primary h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Primary</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-primary-foreground h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Primary Foreground</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-secondary h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Secondary</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-secondary-foreground h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Secondary Foreground</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-muted h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Muted</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-muted-foreground h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Muted Foreground</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-accent h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Accent</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-accent-foreground h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Accent Foreground</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-destructive h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Destructive</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-destructive-foreground h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Destructive Foreground</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-border h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Border</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-input h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Input</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-ring h-8 w-8 rounded-full mb-2"></div>
+            <span className="text-xs">Ring</span>
+          </div>
+        </div>
+      </div>
       <div className="flex flex-col md:flex-row items-center mb-8">
         <div className="md:w-1/2 mb-4 md:mb-0 md:pr-8">
           <Image
