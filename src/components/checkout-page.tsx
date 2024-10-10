@@ -26,6 +26,7 @@ import { selectToken } from "@/redux/slice/user";
 import { useRouter } from "next/navigation";
 import { useGetShippingAddressesQuery } from "@/redux/api/profile";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CheckoutPage() {
   const token = useAppSelector(selectToken);
@@ -96,41 +97,54 @@ export default function CheckoutPage() {
             ) : (
               cartItems.map((item, index) => (
                 <div key={item.id}>
-                  <div className="flex justify-between items-center mb-2">
-                    <div>
-                      <span className="font-medium text-md">{item.name}</span>
-                      <span className="text-sm text-gray-600 ml-2">
-                        <div className="flex items-center space-x-2">
-                          <Button
-                            variant="default"
-                            size="sm"
-                            onClick={() => dispatch(removeFromCart(item))}
-                            disabled={item.quantity === 1}
-                            className="font-bold"
-                          >
-                            -
-                          </Button>
-                          <span className="font-bold">{item.quantity}</span>
-                          <Button
-                            variant="default"
-                            size="sm"
-                            onClick={() => dispatch(addToCart(item))}
-                            className="font-bold"
-                          >
-                            +
-                          </Button>
-                          <span>x ৳{item.price}</span>
-                        </div>
-                      </span>
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-2 sm:space-y-0">
+                    <div className="flex items-center gap-4 w-full sm:w-auto">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        width={60}
+                        height={60}
+                        className="rounded-md"
+                      />
+                      <div className="flex flex-col">
+                        <span className="font-medium text-lg">{item.name}</span>
+                        <span className="text-sm text-gray-600">
+                          ৳{item.price}
+                        </span>
+                      </div>
                     </div>
-
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      onClick={() => dispatch(deleteItemFromCart(item.id))}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+                    <div className="flex items-center space-x-4 w-full sm:w-auto justify-between sm:justify-end">
+                      <div className="flex items-center space-x-2  rounded-md p-1">
+                        <Button
+                          size="sm"
+                          onClick={() => dispatch(removeFromCart(item))}
+                          disabled={item.quantity === 1}
+                          className="font-bold"
+                        >
+                          -
+                        </Button>
+                        <span className="font-bold min-w-[20px] text-center">
+                          {item.quantity}
+                        </span>
+                        <Button
+                          size="sm"
+                          onClick={() => dispatch(addToCart(item))}
+                          className="font-bold"
+                        >
+                          +
+                        </Button>
+                      </div>
+                      <span className="font-semibold">
+                        ৳{item.price * item.quantity}
+                      </span>
+                      <Button
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => dispatch(deleteItemFromCart(item.id))}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                   {index < cartItems.length - 1 && (
                     <hr className="my-2 border-gray-200" />

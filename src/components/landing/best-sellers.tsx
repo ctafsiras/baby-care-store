@@ -54,7 +54,7 @@ export default function BestSellers() {
         <h2 className="text-xl font-bold tracking-tighter sm:text-3xl text-center mb-4">
           Best Sellers
         </h2>
-        <div className="relative p-4 sm:p-8">
+        <div className="relative p-4 sm:p-8 flex justify-center">
           <div className="flex overflow-hidden gap-4">
             {isLoading ? (
               <LoadingSkeleton />
@@ -77,7 +77,7 @@ export default function BestSellers() {
                           <Image
                             src={product?.image || "/placeholder-image.jpg"}
                             alt={product?.name || "Product"}
-                            className="object-cover w-auto h-auto rounded-lg"
+                            className="object-cover w-full h-full rounded-lg"
                             height={200}
                             width={200}
                           />

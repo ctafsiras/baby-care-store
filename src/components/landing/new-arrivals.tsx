@@ -27,13 +27,15 @@ const NewArrivals: React.FC = () => {
                 key={product.id}
                 className="rounded-lg shadow-md overflow-hidden"
               >
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={200}
-                  height={200}
-                  className="w-auto h-auto object-contain"
-                />
+                <div>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={200}
+                    height={200}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                   <p className="text-sm truncate-2 line-clamp-2">
