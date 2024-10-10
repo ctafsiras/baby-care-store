@@ -243,7 +243,11 @@ export default function CheckoutPage() {
               className="w-full mt-4"
               onClick={handleCheckout}
             >
-              Proceed Checkout
+              {cartItems.length === 0
+                ? "Add item to cart"
+                : !shippingAddress
+                ? "Select a shipping address"
+                : "Proceed Checkout"}
             </Button>
           </CardFooter>
         </Card>
