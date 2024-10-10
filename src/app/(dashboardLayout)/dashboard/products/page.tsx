@@ -26,15 +26,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import LoadingSkeleton from "@/components/loading-skeleton";
 
 export default function ProductsPage() {
   const token = useAppSelector(selectToken);
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
   const { data: products, isLoading } = useGetAllProductsQuery(undefined);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <LoadingSkeleton />;
   const handleDelete = async (id: string) => {
     const res = await deleteProduct({ productId: id, token: token as string });
     console.log("res", res);

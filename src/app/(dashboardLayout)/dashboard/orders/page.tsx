@@ -32,6 +32,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import LoadingSkeleton from "@/components/loading-skeleton";
 
 export default function OrdersPage() {
   const token = useAppSelector(selectToken);
@@ -58,9 +59,7 @@ export default function OrdersPage() {
     }
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <LoadingSkeleton />;
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Orders</h1>

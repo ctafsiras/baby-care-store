@@ -13,6 +13,7 @@ import { selectToken } from "@/redux/slice/user";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import ShippingAddress from "@/components/profile/shipping-address";
+import LoadingSkeleton from "@/components/loading-skeleton";
 
 const MyProfile: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,7 +40,7 @@ const MyProfile: React.FC = () => {
     }
   };
   if (isLoading) {
-    return <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />;
+    return <LoadingSkeleton />;
   }
 
   if (!user) {

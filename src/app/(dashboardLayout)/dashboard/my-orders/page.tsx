@@ -15,15 +15,13 @@ import { useGetAllOrdersQuery } from "@/redux/api/order";
 import { toast } from "@/hooks/use-toast";
 import Loading from "@/app/loading";
 import OrderFeedback from "@/components/feedback/order-feedback";
+import LoadingSkeleton from "@/components/loading-skeleton";
 
 export default function MyOrdersPage() {
   const token = useAppSelector(selectToken);
   const { data: orders, isLoading } = useGetAllOrdersQuery(token as string);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
+  if (isLoading) return <LoadingSkeleton />;
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">My Orders</h1>

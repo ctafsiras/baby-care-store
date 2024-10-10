@@ -33,6 +33,7 @@ import {
 } from "@/redux/api/profile";
 import { useAppSelector } from "@/redux/hooks";
 import { selectToken } from "@/redux/slice/user";
+import LoadingSkeleton from "../loading-skeleton";
 
 const addressSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -155,7 +156,7 @@ const ShippingAddress: React.FC = () => {
         </Dialog>
       </div>
       {isLoading ? (
-        <p>Loading addresses...</p>
+        <LoadingSkeleton />
       ) : (
         <Table>
           <TableHeader>

@@ -4,6 +4,7 @@ import { useGetAllReviewsByProductQuery } from "@/redux/api/review";
 import { useAppSelector } from "@/redux/hooks";
 import { selectUserId } from "@/redux/slice/user";
 import Link from "next/link";
+import LoadingSkeleton from "../loading-skeleton";
 
 export const ProductReviews = ({ productId }: { productId: string }) => {
   const { data: reviews, isLoading } =
@@ -29,29 +30,30 @@ export const ProductReviews = ({ productId }: { productId: string }) => {
           You have already reviewed this product
         </p>
       )}
-      {isLoading && (
-        <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />
-      )}
-      {reviews?.map((review) => (
-        <div key={review.id} className="border-b pb-4">
-          <div className="flex items-center space-x-2">
-            <span className="font-semibold">{review.user.name}</span>
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-4 h-4 ${
-                    i < review.rating
-                      ? "text-yellow-400 fill-yellow-400"
-                      : "text-gray-300"
-                  }`}
-                />
-              ))}
+      {isLoading ? (
+        <LoadingSkeleton />
+      ) : (
+        reviews?.map((review) => (
+          <div key={review.id} className="border-b pb-4">
+            <div className="flex items-center space-x-2">
+              <span className="font-semibold">{review.user.name}</span>
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < review.rating
+                        ? "text-yellow-400 fill-yellow-400"
+                        : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
+            <p className="mt-2 text-gray-600">{review.description}</p>
           </div>
-          <p className="mt-2 text-gray-600">{review.description}</p>
-        </div>
-      ))}
+        ))
+      )}
       {reviews?.length === 0 && (
         <p className="text-center text-gray-500">No reviews yet</p>
       )}

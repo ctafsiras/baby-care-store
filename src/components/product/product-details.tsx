@@ -13,6 +13,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { Product } from "@prisma/client";
 import { ProductReviews } from "../review/product-reviews";
 import { calculateAverageRating } from "@/lib/averageRating";
+import LoadingSkeleton from "../loading-skeleton";
 
 export default function ProductDetails({ productId }: { productId: string }) {
   const { data: product, isLoading } = useGetSingleProductQuery(productId);
@@ -30,9 +31,7 @@ export default function ProductDetails({ productId }: { productId: string }) {
     dispatch(addToCartWithQuantity({ ...product, quantity }));
     router.push("/checkout");
   };
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <LoadingSkeleton />;
   if (!product) {
     return notFound();
   }

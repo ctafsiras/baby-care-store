@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { useGetLatestProductsQuery } from "@/redux/api/product";
 import { Product } from "@prisma/client";
 import { Loader2, View } from "lucide-react";
+import LoadingSkeleton from "../loading-skeleton";
 
 const NewArrivals: React.FC = () => {
   const { data: latestProducts, isLoading } = useGetLatestProductsQuery<
@@ -18,7 +19,7 @@ const NewArrivals: React.FC = () => {
           Our New Arrivals
         </h2>
         {isLoading ? (
-          <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />
+          <LoadingSkeleton />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {latestProducts?.map((product: Product) => (

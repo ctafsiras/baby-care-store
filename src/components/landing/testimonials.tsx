@@ -4,11 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Loader2, Star } from "lucide-react";
 import { useGetAllOrderFeedbacksQuery } from "@/redux/api/orderFeedback";
+import LoadingSkeleton from "../loading-skeleton";
 
 export default function Testimonials() {
   const { data: feedbacks, isLoading } = useGetAllOrderFeedbacksQuery();
-  if (isLoading)
-    return <Loader2 className="mx-auto size-10 h-full my-auto animate-spin" />;
+  if (isLoading) return <LoadingSkeleton />;
   return (
     <section className=" w-full py-8 sm:px-4">
       <div className="container mx-auto px-4 md:px-6">
