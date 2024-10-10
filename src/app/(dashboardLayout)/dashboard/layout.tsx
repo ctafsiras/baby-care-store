@@ -5,7 +5,7 @@ import { selectRole } from "@/redux/slice/user";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Box, Plus, ShoppingCart, User } from "lucide-react";
+import { Box, Plus, ShoppingCart, User, BarChart } from "lucide-react";
 
 export default function DashboardLayout({
   children,
@@ -31,6 +31,7 @@ export default function DashboardLayout({
   const navItems = [
     ...(role === "admin"
       ? [
+          { href: "/dashboard", label: "Overview", icon: <BarChart /> },
           { href: "/dashboard/products", label: "Products", icon: <Box /> },
           {
             href: "/dashboard/add-product",
@@ -49,6 +50,11 @@ export default function DashboardLayout({
           },
         ]
       : [
+          {
+            href: "/dashboard",
+            label: "Overview",
+            icon: <BarChart />,
+          },
           {
             href: "/dashboard/my-orders",
             label: "My Orders",
@@ -73,8 +79,8 @@ export default function DashboardLayout({
                   href={item.href}
                   className={`block rounded-lg px-4 md:px-4 py-2 text-sm transition-all duration-300 ${
                     pathname === item.href
-                      ? "bg-black text-white dark:bg-white dark:text-black"
-                      : "hover:bg-black/90 hover:text-white dark:hover:bg-white/90 dark:hover:text-black"
+                      ? "bg-primary text-white dark:bg-white dark:text-black"
+                      : "hover:bg-primary/90 hover:text-white dark:hover:bg-white/90 dark:hover:text-black"
                   } ${isMobile ? "flex justify-center" : "flex items-center"}`}
                 >
                   <span className="text-xl">{item.icon}</span>

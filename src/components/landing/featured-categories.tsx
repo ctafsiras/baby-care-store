@@ -36,7 +36,7 @@ export default function FeaturedCategories() {
                   <h3 className="text-xl font-semibold mb-2">
                     {category.name}
                   </h3>
-                  <p className="text-gray-600">{category.description}</p>
+                  <p className="">{category.description}</p>
                 </CardContent>
               </Card>
             </Link>

@@ -53,9 +53,7 @@ export default function Testimonials() {
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-600 italic">
-                  &ldquo;{feedback.description}&rdquo;
-                </p>
+                <p className="italic">&ldquo;{feedback.description}&rdquo;</p>
               </CardContent>
             </Card>
           ))}
